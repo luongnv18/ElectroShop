@@ -1,3 +1,6 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="electro.entity.DanhMuc"%>
+<%@page import="java.util.List"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,7 +13,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - HTML Ecommerce Template</title>
+		<title>Electro Shop</title>
 
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -48,11 +51,16 @@
 					<ul class="header-links pull-left">
 						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
 						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i> 236 Hoàng Quốc Việt, Cầu Giấy, Hà Nội</a></li>
 					</ul>
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="dangnhap/"><i class="fa fa-user-o"></i> My Account</a></li>
+						<%
+							String email="Đăng Nhập";
+							if(request.getAttribute("email")!=null)
+							 	email="Xin chào "+request.getAttribute("email").toString();
+						%>
+						<li><a href="dangnhap"><i class="fa fa-user-o"></i><%=email %></a></li>
 					</ul>
 				</div>
 			</div>
@@ -80,11 +88,17 @@
 								<form>
 									<select class="input-select">
 										<option value="0">All Categories</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
+										<%
+											List<DanhMuc> lstdanhmuc= (List<DanhMuc>) request.getAttribute("lstDanhMuc");
+											for(DanhMuc dm :lstdanhmuc){
+										%>
+										<option value="1"><%=dm.getTenDanhMuc() %></option>
+										<%
+											}
+										%>
 									</select>
-									<input class="input" placeholder="Search here">
-									<button class="search-btn">Search</button>
+									<input class="input" placeholder="Từ khóa">
+									<button class="search-btn">Tìm kiếm</button>
 								</form>
 							</div>
 						</div>
@@ -97,7 +111,7 @@
 								<div>
 									<a href="#">
 										<i class="fa fa-heart-o"></i>
-										<span>Your Wishlist</span>
+										<span>Yêu thích</span>
 										<div class="qty">2</div>
 									</a>
 								</div>
@@ -107,7 +121,7 @@
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>
+										<span>Giỏ hàng</span>
 										<div class="qty">3</div>
 									</a>
 									<div class="cart-dropdown">
@@ -174,13 +188,14 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
+						<li class="active"><a href="#">Trang Chủ</a></li>
+						<%
+							for(DanhMuc dm :lstdanhmuc){
+						%>
+						<li><a href="#"><%=dm.getTenDanhMuc() %></a></li>
+						<%
+							}
+						%>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -254,13 +269,16 @@
 					<!-- section title -->
 					<div class="col-md-12">
 						<div class="section-title">
-							<h3 class="title">New Products</h3>
+							<h3 class="title">SẢN PHẨM MỚI</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
-									<li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
-									<li><a data-toggle="tab" href="#tab1">Cameras</a></li>
-									<li><a data-toggle="tab" href="#tab1">Accessories</a></li>
+									<%
+										for(DanhMuc dm :lstdanhmuc){
+									%>
+									<li class="active"><a data-toggle="tab" href="#tab1"><%=dm.getTenDanhMuc() %></a></li>
+									<%
+										}
+									%>
 								</ul>
 							</div>
 						</div>
@@ -492,10 +510,14 @@
 							<h3 class="title">Top selling</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
-									<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
-									<li><a data-toggle="tab" href="#tab2">Cameras</a></li>
-									<li><a data-toggle="tab" href="#tab2">Accessories</a></li>
+									<%
+										for(DanhMuc dm :lstdanhmuc){
+									%>
+									<li class="active"><a data-toggle="tab" href="#tab2"><%=dm.getTenDanhMuc() %></a></li>
+									<%
+										}
+									%>
+									
 								</ul>
 							</div>
 						</div>
