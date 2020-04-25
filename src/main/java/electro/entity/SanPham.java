@@ -121,5 +121,10 @@ public class SanPham {
 		this.danhMuc = danhMuc;
 	}
 	
+	//tra ve mang danh sach cac anh cua san pham
+	public String[] GetListImage() {
+		String [] arrstr=this.Image.split(";");
+		return arrstr;
+	}
 	
 }

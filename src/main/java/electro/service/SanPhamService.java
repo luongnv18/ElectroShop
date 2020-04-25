@@ -12,8 +12,13 @@ import electro.entity.SanPham;
 public class SanPhamService {
 	@Autowired
 	SanPhamDAO sanphamDAO;
+	
 	public List<SanPham> GetListSanPham(){
 		return sanphamDAO.GetListSanPham();
+	}
+	public SanPham GetSanPhamById(int Id) {
+		SanPham sanPham=sanphamDAO.GetSanPhamById(Id);
+		return sanPham;
 	}
 }
 
