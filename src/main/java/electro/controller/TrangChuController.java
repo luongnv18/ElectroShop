@@ -18,20 +18,19 @@ import electro.service.SanPhamService;
 @RequestMapping("/")
 @SessionAttributes("email")
 public class TrangChuController {
-	
+
 	@Autowired
 	DanhMucSPService danhMucSPService;
 	@Autowired
 	SanPhamService sanPhamService;
-	
+
 	@GetMapping
 	public String Default(ModelMap modelMap) {
-		List<DanhMuc> lstDanhMucs= danhMucSPService.GetListDanhMuc();
+		List<DanhMuc> lstDanhMucs = danhMucSPService.GetListDanhMuc();
 		List<SanPham> lstSanPhams = sanPhamService.GetListSanPham();
-		modelMap.addAttribute("lstDanhMuc",lstDanhMucs);
-		modelMap.addAttribute("lstSanPham", lstSanPhams);
+		modelMap.addAttribute("lstDanhMuc", lstDanhMucs);
+		modelMap.addAttribute("lstSP", lstSanPhams);
 		return "TrangChu";
 	}
-	
-	
+
 }
