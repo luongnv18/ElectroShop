@@ -51,6 +51,10 @@
 
 </head>
 <body>
+	<%
+	List<DanhMuc> lstdanhmuc= (List<DanhMuc>) request.getAttribute("lstDanhMuc");
+	List<SanPham> lstSP = (List<SanPham>) request.getAttribute("lstSanPham"); 
+	%>
 	<!-- HEADER -->
 	<header>
 		<!-- TOP HEADER -->
@@ -99,7 +103,6 @@
 								<select class="input-select">
 									<option value="0">All Categories</option>
 									<%
-											List<DanhMuc> lstdanhmuc= (List<DanhMuc>) request.getAttribute("lstDanhMuc");
 											for(DanhMuc dm :lstdanhmuc){
 										%>
 									<option value="1"><%=dm.getTenDanhMuc() %></option>
@@ -315,9 +318,6 @@
 				<!-- /section title -->
 
 				<!-- Products tab & slick -->	
-				<% List<SanPham> lstSP = (List<SanPham>) request.getAttribute("lstSanPham");  
-					
-				%>	
 				<div class="col-md-12">
 					<div class="row">
 						<div class="products-tabs">
@@ -330,7 +330,7 @@
 									<!-- product -->
 									<div class="product">
 										<div class="product-img">
-											<img src="<c:url value="/resources/img/product01.png"/>"
+											<img src="<c:url value="<%=sp.GetListImage()[0] %>"/>"
 												alt="">
 											<div class="product-label">
 												<span class="sale">30%</span> <span class="new">NEW</span>
@@ -339,7 +339,7 @@
 										<div class="product-body">
 											<p class="product-category"> </p>
 											<h3 class="product-name">
-												<a href="#"> <%=sp.getTenSanPham() %> </a>
+												<a href="chitiet/<%=sp.getIdSanPham()%>"> <%=sp.getTenSanPham() %> </a>
 											</h3>
 											<h4 class="product-price">
 												<%=sp.getGia() %>
