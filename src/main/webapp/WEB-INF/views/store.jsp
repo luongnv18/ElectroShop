@@ -1,3 +1,4 @@
+<%@page import="electro.entity.ThuongHieu"%>
 <%@page import="electro.entity.SanPham"%>
 <%@page import="electro.entity.DanhMuc"%>
 <%@page import="java.util.List"%>
@@ -50,6 +51,11 @@
 
 </head>
 <body>
+	<%
+		List<DanhMuc> lstdanhmuc = (List<DanhMuc>) request.getAttribute("lstDanhMuc");
+		List<SanPham> lstSanPham = (List<SanPham>) request.getAttribute("lstSanPham");
+		List<ThuongHieu> lstThuongHieu = (List<ThuongHieu>) request.getAttribute("lstThuongHieu");
+	%>
 	<!-- HEADER -->
 	<header>
 		<!-- TOP HEADER -->
@@ -84,7 +90,7 @@
 					<!-- LOGO -->
 					<div class="col-md-3">
 						<div class="header-logo">
-							<a href="./TrangChu" class="logo"> <img
+							<a href="./" class="logo"> <img
 								src="<c:url value="/resources/img/logo.png"/>" alt="">
 							</a>
 						</div>
@@ -96,16 +102,16 @@
 						<div class="header-search">
 							<form>
 								<select class="input-select">
+									<option value="0">Tất cả sản phẩm</option>
 									<%
-										List<DanhMuc> lstdanhmuc = (List<DanhMuc>) request.getAttribute("lstDanhMuc");
 										for (DanhMuc dm : lstdanhmuc) {
 									%>
 									<option value="1"><%=dm.getTenDanhMuc()%></option>
 									<%
 										}
 									%>
-								</select> <input class="input" placeholder="Search here">
-								<button class="search-btn">Search</button>
+								</select> <input class="input" placeholder="Từ khóa">
+								<button class="search-btn">Tìm kiếm</button>
 							</form>
 						</div>
 					</div>
@@ -204,7 +210,7 @@
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li><a href="./TrangChu">Trang chủ</a></li>
+					<li><a href="./">Trang chủ</a></li>
 					<li class="active"><a href="./SanPham">Sản phẩm</a></li>
 					<li><a href="#">Loại sản phẩm</a></li>
 				</ul>
@@ -224,14 +230,8 @@
 			<div class="row">
 				<div class="col-md-12">
 					<ul class="breadcrumb-tree">
-						<li class="active"><a href="#">Trang Chủ</a></li>
-						<%
-							for (DanhMuc dm : lstdanhmuc) {
-						%>
-						<li><a href="#"><%=dm.getTenDanhMuc()%></a></li>
-						<%
-							}
-						%>
+						<li><a href="./">Trang chủ</a></li>
+						<li><a href="/ElectroShop/SanPham">Sản phẩm</a></li>
 					</ul>
 				</div>
 			</div>
@@ -251,51 +251,31 @@
 				<div id="aside" class="col-md-3">
 					<!-- aside Widget -->
 					<div class="aside">
-						<h3 class="aside-title">Categories</h3>
+						<h3 class="aside-title">Loại sản phẩm</h3>
 						<div class="checkbox-filter">
+							<%
+								int i = 0;
+								for (DanhMuc danhmuc : lstdanhmuc) {
+									i++;
+							%>
 
 							<div class="input-checkbox">
-								<input type="checkbox" id="category-1"> <label
-									for="category-1"> <span></span> Laptops <small>(120)</small>
+								<input type="checkbox" id="category-<%=i%>"> <label
+									for="category-<%=i%>"> <span></span> <%=danhmuc.getTenDanhMuc()%>
+									<small>(120)</small>
 								</label>
 							</div>
 
-							<div class="input-checkbox">
-								<input type="checkbox" id="category-2"> <label
-									for="category-2"> <span></span> Smartphones <small>(740)</small>
-								</label>
-							</div>
-
-							<div class="input-checkbox">
-								<input type="checkbox" id="category-3"> <label
-									for="category-3"> <span></span> Cameras <small>(1450)</small>
-								</label>
-							</div>
-
-							<div class="input-checkbox">
-								<input type="checkbox" id="category-4"> <label
-									for="category-4"> <span></span> Accessories <small>(578)</small>
-								</label>
-							</div>
-
-							<div class="input-checkbox">
-								<input type="checkbox" id="category-5"> <label
-									for="category-5"> <span></span> Laptops <small>(120)</small>
-								</label>
-							</div>
-
-							<div class="input-checkbox">
-								<input type="checkbox" id="category-6"> <label
-									for="category-6"> <span></span> Smartphones <small>(740)</small>
-								</label>
-							</div>
+							<%
+								}
+							%>
 						</div>
 					</div>
 					<!-- /aside Widget -->
 
 					<!-- aside Widget -->
 					<div class="aside">
-						<h3 class="aside-title">Price</h3>
+						<h3 class="aside-title">Giá</h3>
 						<div class="price-filter">
 							<div id="price-slider"></div>
 							<div class="input-number price-min">
@@ -313,92 +293,53 @@
 
 					<!-- aside Widget -->
 					<div class="aside">
-						<h3 class="aside-title">Brand</h3>
+						<h3 class="aside-title">Thương hiệu</h3>
+						<%
+							int j = 0;
+							for (ThuongHieu thuonghieu : lstThuongHieu) {
+								j++;
+						%>
 						<div class="checkbox-filter">
 							<div class="input-checkbox">
-								<input type="checkbox" id="brand-1"> <label
-									for="brand-1"> <span></span> SAMSUNG <small>(578)</small>
-								</label>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-2"> <label
-									for="brand-2"> <span></span> LG <small>(125)</small>
-								</label>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-3"> <label
-									for="brand-3"> <span></span> SONY <small>(755)</small>
-								</label>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-4"> <label
-									for="brand-4"> <span></span> SAMSUNG <small>(578)</small>
-								</label>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-5"> <label
-									for="brand-5"> <span></span> LG <small>(125)</small>
-								</label>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-6"> <label
-									for="brand-6"> <span></span> SONY <small>(755)</small>
+								<input type="checkbox" id="brand-<%=j%>" /> <label
+									for="brand-<%=j%>"> <span></span> <%=thuonghieu.getTenThuongHieu()%>
+									<small>(578)</small>
 								</label>
 							</div>
 						</div>
+
+						<%
+							}
+						%>
 					</div>
 					<!-- /aside Widget -->
 
 					<!-- aside Widget -->
 					<div class="aside">
-						<h3 class="aside-title">Top selling</h3>
+						<h3 class="aside-title">Sản phẩm bán chạy</h3>
+						<%
+							for (SanPham sp : lstSanPham) {
+						%>
 						<div class="product-widget">
-							<div class="product-img">
-								<img src="<c:url value="/resources/img/product01.png"/>" alt="">
-							</div>
+							<a href="ChiTiet/<%=sp.getIdSanPham()%>">
+								<div class="product-img">
+									<img src="<c:url value="<%=sp.GetListImage()[0]%>"/>" alt="">
+								</div>
+							</a>
 							<div class="product-body">
-								<p class="product-category">Category</p>
+								<p class="product-category"><%=sp.getThuongHieu().getTenThuongHieu()%></p>
 								<h3 class="product-name">
-									<a href="#">product name goes here</a>
+									<a href="ChiTiet/<%=sp.getIdSanPham()%>"><%=sp.getTenSanPham()%></a>
 								</h3>
 								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
+									<%=sp.getGia()%>
+									<del class="product-old-price"><%=sp.getGia()%></del>
 								</h4>
 							</div>
 						</div>
-
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="<c:url value="/resources/img/product02.png"/>" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
-
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="<c:url value="/resources/img/product03.png"/>" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
+						<%
+							}
+						%>
 					</div>
 					<!-- /aside Widget -->
 				</div>
@@ -427,10 +368,7 @@
 					<!-- /store top filter -->
 
 					<!-- store products -->
-					<%
-						if (request.getAttribute("lstSP") != null) {
-							List<SanPham> lstSanPham = (List<SanPham>) request.getAttribute("lstSP");
-					%>
+
 					<div class="row">
 						<%
 							for (SanPham sp : lstSanPham) {
@@ -490,9 +428,7 @@
 						%>
 					</div>
 					<!-- /store products -->
-					<%
-						}
-					%>
+
 					<!-- store bottom filter -->
 					<div class="store-filter clearfix">
 						<span class="store-qty">Showing 20-100 products</span>

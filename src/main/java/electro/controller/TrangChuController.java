@@ -15,7 +15,7 @@ import electro.service.DanhMucSPService;
 import electro.service.SanPhamService;
 
 @Controller
-@RequestMapping("/TrangChu")
+@RequestMapping("/")
 @SessionAttributes("email")
 public class TrangChuController {
 
