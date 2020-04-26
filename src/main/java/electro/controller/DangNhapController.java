@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import electro.service.KhachHangService;
 
 @Controller
-@RequestMapping("/dangnhap")
+@RequestMapping("/DangNhap")
 @SessionAttributes("email")
 public class DangNhapController {
 	@GetMapping

@@ -15,7 +15,7 @@ import electro.service.DanhMucSPService;
 import electro.service.SanPhamService;
 
 @Controller
-@RequestMapping("/chitiet")
+@RequestMapping("/ChiTiet")
 public class ChiTietController {
 	@Autowired
 	SanPhamService sanPhamService;

@@ -69,7 +69,7 @@
 						if (request.getAttribute("email") != null)
 							email = "Xin chào " + request.getAttribute("email").toString();
 					%>
-					<li><a href="dangnhap"><i class="fa fa-user-o"></i><%=email%></a></li>
+					<li><a href="./DangNhap"><i class="fa fa-user-o"></i><%=email%></a></li>
 				</ul>
 			</div>
 		</div>
@@ -84,7 +84,7 @@
 					<!-- LOGO -->
 					<div class="col-md-3">
 						<div class="header-logo">
-							<a href="#" class="logo"> <img
+							<a href="./TrangChu" class="logo"> <img
 								src="<c:url value="/resources/img/logo.png"/>" alt="">
 							</a>
 						</div>
@@ -204,14 +204,9 @@
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li class="active"><a href="#">Trang Chủ</a></li>
-					<%
-						for (DanhMuc dm : lstdanhmuc) {
-					%>
-					<li><a href="#"><%=dm.getTenDanhMuc()%></a></li>
-					<%
-						}
-					%>
+					<li><a href="./TrangChu">Trang chủ</a></li>
+					<li class="active"><a href="./SanPham">Sản phẩm</a></li>
+					<li><a href="#">Loại sản phẩm</a></li>
 				</ul>
 				<!-- /NAV -->
 			</div>
@@ -443,16 +438,18 @@
 						<!-- product -->
 						<div class="col-md-4 col-xs-6">
 							<div class="product">
-								<div class="product-img">
-									<img src="<c:url value="<%=sp.getImage()%>"/>" alt="">
-									<div class="product-label">
-										<span class="sale">-30%</span> <span class="new">NEW</span>
+								<a href="ChiTiet/<%=sp.getIdSanPham()%>">
+									<div class="product-img">
+										<img src="<c:url value="<%=sp.getImage()%>"/>" alt="">
+										<div class="product-label">
+											<span class="sale">-30%</span> <span class="new">NEW</span>
+										</div>
 									</div>
-								</div>
+								</a>
 								<div class="product-body">
 									<p class="product-category">Category</p>
 									<h3 class="product-name">
-										<a href="#"><%=sp.getTenSanPham()%></a>
+										<a href="ChiTiet/<%=sp.getIdSanPham()%>"> <%=sp.getTenSanPham()%></a>
 									</h3>
 									<h4 class="product-price">
 										<%=sp.getGia()%>
