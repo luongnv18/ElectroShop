@@ -83,7 +83,7 @@
 					<!-- LOGO -->
 					<div class="col-md-3">
 						<div class="header-logo">
-							<a href="/ElectroShop/TrangChu" class="logo"> <img
+							<a href="/ElectroShop" class="logo"> <img
 								src="<c:url value="/resources/img/logo.png"/>" alt="">
 							</a>
 						</div>
@@ -205,7 +205,7 @@
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li><a href="/ElectroShop/TrangChu">Trang chủ</a></li>
+					<li><a href="/ElectroShop">Trang chủ</a></li>
 					<li class="active"><a href="/ElectroShop/SanPham">Sản phẩm</a></li>
 					<li><a href="#">Loại sản phẩm</a></li>
 				</ul>

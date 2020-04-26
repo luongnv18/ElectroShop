@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import electro.entity.DanhMuc;
 import electro.entity.SanPham;
+import electro.entity.ThuongHieu;
 import electro.service.DanhMucSPService;
 import electro.service.SanPhamService;
+import electro.service.ThuongHieuSPService;
 
 @Controller
 @RequestMapping("/SanPham")
@@ -24,12 +26,17 @@ public class StoreController {
 	@Autowired
 	SanPhamService sanPhamService;
 	
+	@Autowired
+	ThuongHieuSPService thuongHieuSPService;
+	
 	@GetMapping
 	public String Default(ModelMap modelMap) {
 		List<DanhMuc> lstDanhMucs= danhMucSPService.GetListDanhMuc();
 		List<SanPham> lstSanPhams = sanPhamService.GetListSanPham();
+		List<ThuongHieu> lstThuongHieus = thuongHieuSPService.GetListThuongHieu();
 		modelMap.addAttribute("lstDanhMuc",lstDanhMucs);
-		modelMap.addAttribute("lstSP", lstSanPhams);
+		modelMap.addAttribute("lstSanPham", lstSanPhams);
+		modelMap.addAttribute("lstThuongHieu", lstThuongHieus);
 		return "store";
 	}
 }
