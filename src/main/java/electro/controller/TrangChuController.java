@@ -15,7 +15,7 @@ import electro.service.DanhMucSPService;
 import electro.service.SanPhamService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/TrangChu")
 @SessionAttributes("email")
 public class TrangChuController {
 
@@ -29,7 +29,7 @@ public class TrangChuController {
 		List<DanhMuc> lstDanhMucs = danhMucSPService.GetListDanhMuc();
 		List<SanPham> lstSanPhams = sanPhamService.GetListSanPham();
 		modelMap.addAttribute("lstDanhMuc", lstDanhMucs);
-		modelMap.addAttribute("lstSP", lstSanPhams);
+		modelMap.addAttribute("lstSanPham", lstSanPhams);
 		return "TrangChu";
 	}
 

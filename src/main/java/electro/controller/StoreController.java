@@ -15,7 +15,7 @@ import electro.service.DanhMucSPService;
 import electro.service.SanPhamService;
 
 @Controller
-@RequestMapping("/store")
+@RequestMapping("/SanPham")
 public class StoreController {
 	
 	@Autowired
