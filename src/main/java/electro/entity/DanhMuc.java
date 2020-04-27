@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import electro.service.SanPhamService;
+
 @Entity(name="DanhMuc")
 public class DanhMuc {
 	@Id
@@ -24,6 +26,4 @@ public class DanhMuc {
 	public void setTenDanhMuc(String tenDanhMuc) {
 		TenDanhMuc = tenDanhMuc;
 	}
-	
-	
 }

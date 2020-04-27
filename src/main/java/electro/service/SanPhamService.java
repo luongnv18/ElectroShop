@@ -20,5 +20,10 @@ public class SanPhamService {
 		SanPham sanPham=sanphamDAO.GetSanPhamById(Id);
 		return sanPham;
 	}
+	public List<Long> DemSPTheoDM(){
+		return sanphamDAO.DemSPTheoDM();
+	}
+	public List<Long> DemSPTheoTh(){
+		return sanphamDAO.DemSPTheoTH();
+	}
 }
-
