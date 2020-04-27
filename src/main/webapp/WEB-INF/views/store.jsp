@@ -57,153 +57,9 @@
 		List<ThuongHieu> lstThuongHieu = (List<ThuongHieu>) request.getAttribute("lstThuongHieu");
 		List<Long> lstSoLuongTheoDM = (List<Long>) request.getAttribute("lstSoLuongTheoDM");
 		List<Long> lstSoLuongTheoTH = (List<Long>) request.getAttribute("lstSoLuongTheoTH");
-		List<SanPham> lstSPTheoDM = (List<SanPham>) request.getAttribute("lstSPTimKiemTheoDM");
+		List<SanPham> lstSPTimKiem = (List<SanPham>) request.getAttribute("lstSPTimKiem");
 	%>
-	<!-- HEADER -->
-	<header>
-		<!-- TOP HEADER -->
-		<div id="top-header">
-			<div class="container">
-				<ul class="header-links pull-left">
-					<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-					<li><a href="#"><i class="fa fa-envelope-o"></i>
-							email@email.com</a></li>
-					<li><a href="#"><i class="fa fa-map-marker"></i> 1734
-							Stonecoal Road</a></li>
-				</ul>
-				<ul class="header-links pull-right">
-					<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-					<%
-						String email = "Đăng Nhập";
-						if (request.getAttribute("email") != null)
-							email = "Xin chào " + request.getAttribute("email").toString();
-					%>
-					<li><a href="./DangNhap"><i class="fa fa-user-o"></i><%=email%></a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- /TOP HEADER -->
-
-		<!-- MAIN HEADER -->
-		<div id="header">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<!-- LOGO -->
-					<div class="col-md-3">
-						<div class="header-logo">
-							<a href="./" class="logo"> <img
-								src="<c:url value="/resources/img/logo.png"/>" alt="">
-							</a>
-						</div>
-					</div>
-					<!-- /LOGO -->
-
-					<!-- SEARCH BAR -->
-					<div class="col-md-6">
-						<div class="header-search">
-							<form>
-								<select class="input-select">
-									<option value="0">Tất cả sản phẩm</option>
-									<%
-										for (DanhMuc dm : lstdanhmuc) {
-									%>
-									<option value="1"><%=dm.getTenDanhMuc()%></option>
-									<%
-										}
-									%>
-								</select> <input class="input" placeholder="Từ khóa">
-								<button class="search-btn">Tìm kiếm</button>
-							</form>
-						</div>
-					</div>
-					<!-- /SEARCH BAR -->
-
-					<!-- ACCOUNT -->
-					<div class="col-md-3 clearfix">
-						<div class="header-ctn">
-							<!-- Wishlist -->
-							<div>
-								<a href="#"> <i class="fa fa-heart-o"></i> <span>Your
-										Wishlist</span>
-									<div class="qty">2</div>
-								</a>
-							</div>
-							<!-- /Wishlist -->
-
-							<!-- Cart -->
-							<div class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown"
-									aria-expanded="true"> <i class="fa fa-shopping-cart"></i> <span>Your
-										Cart</span>
-									<div class="qty">3</div>
-								</a>
-								<div class="cart-dropdown">
-									<div class="cart-list">
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="/resources/img/product01.png" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name">
-													<a href="#">product name goes here</a>
-												</h3>
-												<h4 class="product-price">
-													<span class="qty">1x</span>$980.00
-												</h4>
-											</div>
-											<button class="delete">
-												<i class="fa fa-close"></i>
-											</button>
-										</div>
-
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="/resources/img/product02.png" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name">
-													<a href="#">product name goes here</a>
-												</h3>
-												<h4 class="product-price">
-													<span class="qty">3x</span>$980.00
-												</h4>
-											</div>
-											<button class="delete">
-												<i class="fa fa-close"></i>
-											</button>
-										</div>
-									</div>
-									<div class="cart-summary">
-										<small>3 Item(s) selected</small>
-										<h5>SUBTOTAL: $2940.00</h5>
-									</div>
-									<div class="cart-btns">
-										<a href="#">View Cart</a> <a href="#">Checkout <i
-											class="fa fa-arrow-circle-right"></i></a>
-									</div>
-								</div>
-							</div>
-							<!-- /Cart -->
-
-							<!-- Menu Toogle -->
-							<div class="menu-toggle">
-								<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
-								</a>
-							</div>
-							<!-- /Menu Toogle -->
-						</div>
-					</div>
-					<!-- /ACCOUNT -->
-				</div>
-				<!-- row -->
-			</div>
-			<!-- container -->
-		</div>
-		<!-- /MAIN HEADER -->
-	</header>
-	<!-- /HEADER -->
+	<jsp:include page="header.jsp"></jsp:include>
 
 	<!-- NAVIGATION -->
 	<nav id="navigation">
@@ -250,32 +106,35 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
+				
 				<!-- ASIDE -->
+				<form method="get">
 				<div id="aside" class="col-md-3">
 					<!-- aside Widget -->
 					<div class="aside">
 						<h3 class="aside-title">Loại sản phẩm</h3>
-						<form method="get">
-						<div class="checkbox-filter">
-							<%
-								int i = 0;
-								for (DanhMuc danhmuc : lstdanhmuc) {
-									i++;
-							%>
+						
+							<div class="checkbox-filter">
+								<%
+									int i = 0;
+									for (DanhMuc danhmuc : lstdanhmuc) {
+										i++;
+								%>
 
-							<div class="input-checkbox">
-								<input type="checkbox" id="category-<%=i%>" name="category" value="<%=danhmuc.getIdDanhMuc()%>"> 
-								<label for="category-<%=i%>"> 
-									<span></span><%=danhmuc.getTenDanhMuc()%>
-									<small>(<%=lstSoLuongTheoDM.get(i-1)%>)</small>
-								</label>
-								
+								<div class="input-checkbox">
+									<input type="checkbox" id="category-<%=i%>" name="category"
+										value="<%=danhmuc.getIdDanhMuc()%>"> <label
+										for="category-<%=i%>"> <span></span><%=danhmuc.getTenDanhMuc()%>
+										<small>(<%=lstSoLuongTheoDM.get(i - 1)%>)
+									</small>
+									</label>
+
+								</div>
+								<%
+									}
+								%>
+								<button class="search-btn-2" type="submit">Tìm kiếm</button>
 							</div>
-							<%
-								}
-							%>
-							<input type="submit" value="Ok" />
-						</div>
 						</form>
 					</div>
 					<!-- /aside Widget -->
@@ -285,13 +144,13 @@
 						<h3 class="aside-title">Giá</h3>
 						<div class="price-filter">
 							<div id="price-slider"></div>
-							<div class="input-number price-min">
-								<input id="price-min" type="number"> <span
+							<div class="input-number">
+								<input type="number" placeholder="Từ" name="price-from"> <span
 									class="qty-up">+</span> <span class="qty-down">-</span>
 							</div>
 							<span>-</span>
-							<div class="input-number price-max">
-								<input id="price-max" type="number"> <span
+							<div class="input-number">
+								<input type="number" placeholder="Đến" name="price-to"> <span
 									class="qty-up">+</span> <span class="qty-down">-</span>
 							</div>
 						</div>
@@ -301,22 +160,25 @@
 					<!-- aside Widget -->
 					<div class="aside">
 						<h3 class="aside-title">Thương hiệu</h3>
-						<%
-							int j = 0;
-							for (ThuongHieu thuonghieu : lstThuongHieu) {
-								j++;
-						%>
-						<div class="checkbox-filter">
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-<%=j%>" /> <label
-									for="brand-<%=j%>"> <span></span> <%=thuonghieu.getTenThuongHieu()%>
-									<small>(<%=lstSoLuongTheoTH.get(j-1)%>)</small>
-								</label>
+							<%
+								int j = 0;
+								for (ThuongHieu thuonghieu : lstThuongHieu) {
+									j++;
+							%>
+							<div class="checkbox-filter">
+								<div class="input-checkbox">
+									<input type="checkbox" id="brand-<%=j%>" name="brand"
+										value="<%=thuonghieu.getIdThuongHieu()%>" /> <label
+										for="brand-<%=j%>"> <span></span> <%=thuonghieu.getTenThuongHieu()%>
+										<small>(<%=lstSoLuongTheoTH.get(j - 1)%>)
+									</small>
+									</label>
+								</div>
 							</div>
-						</div>
-						<%
-							}
-						%>
+							<%
+								}
+							%>
+							<button class="search-btn-2" type="submit">Tìm kiếm</button>
 					</div>
 					<!-- /aside Widget -->
 
@@ -324,7 +186,7 @@
 					<div class="aside">
 						<h3 class="aside-title">Sản phẩm bán chạy</h3>
 						<%
-							for (SanPham sp : lstSPTheoDM) {
+							for (SanPham sp : lstSanPham) {
 						%>
 						<div class="product-widget">
 							<a href="ChiTiet/<%=sp.getIdSanPham()%>">
@@ -349,8 +211,9 @@
 					</div>
 					<!-- /aside Widget -->
 				</div>
+				</form>
 				<!-- /ASIDE -->
-
+				
 				<!-- STORE -->
 				<div id="store" class="col-md-9">
 					<!-- store top filter -->
@@ -377,7 +240,7 @@
 
 					<div class="row">
 						<%
-							for (SanPham sp : lstSPTheoDM) {
+							for (SanPham sp : lstSPTimKiem) {
 						%>
 						<!-- product -->
 						<div class="col-md-4 col-xs-6">
@@ -420,8 +283,10 @@
 									</div>
 								</div>
 								<div class="add-to-cart">
-									<button class="add-to-cart-btn">
-										<i class="fa fa-shopping-cart"></i> add to cart
+									<button class="add-to-cart-btn btn-giohang-trangchu"
+										data-masp=<%=sp.getIdSanPham()%> data-giasp=<%=sp.getGia()%>>
+										<span class="the-an"><%=sp.getTenSanPham()%></span> <i
+											class="fa fa-shopping-cart"></i> add to cart
 									</button>
 								</div>
 							</div>
@@ -595,6 +460,7 @@
 	<script src="<c:url value="/resources/js/nouislider.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/jquery.zoom.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/main.js"/>"></script>
+	<script src="<c:url value="/resources/js/custom.js"/>"></script>
 
 </body>
 </html>

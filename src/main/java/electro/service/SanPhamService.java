@@ -29,4 +29,13 @@ public class SanPhamService {
 	public List<SanPham> TimKiemSanPhamTheoDanhMuc(String key){
 		return sanphamDAO.TimKiemSanPhamTheoDanhMuc(key);
 	}
+	public List<SanPham> TimKiemSanPhamTheoThuongHieu(String key){
+		return sanphamDAO.TimKiemSanPhamTheoThuongHieu(key);
+	}
+	public List<SanPham> TimKiemSanPhamTheoDanhMucVaThuongHieu(String dm, String th){
+		return sanphamDAO.TimKiemSanPhamTheoThuongHieuVaDanhMuc(dm, th);
+	}
+	public List<SanPham> TimKiemSanPhamTheoGia(String from, String to){
+		return sanphamDAO.TimKiemSanPhamTheoGia(from, to);
+	}
 }

@@ -35,7 +35,11 @@ public class StoreController {
 	ThuongHieuSPService thuongHieuSPService;
 
 	@GetMapping
-	public String Default(ModelMap modelMap, @RequestParam(required=false,name="category") String category) {
+	public String Default(ModelMap modelMap, @RequestParam(required = false, name = "category") String category,
+			@RequestParam(required = false, name = "brand") String brand,
+			@RequestParam(required = false, name = "price-from") String from,
+			@RequestParam(required = false, name = "price-to") String to) {
+		
 		List<DanhMuc> lstDanhMucs = danhMucSPService.GetListDanhMuc();
 		List<SanPham> lstSanPhams = sanPhamService.GetListSanPham();
 		List<ThuongHieu> lstThuongHieus = thuongHieuSPService.GetListThuongHieu();
@@ -47,11 +51,37 @@ public class StoreController {
 		modelMap.addAttribute("lstSoLuongTheoDM", lstSoLuongTheoDM);
 		modelMap.addAttribute("lstSoLuongTheoTH", lstSoLuongTheoTH);
 		
-		List<SanPham> TimKiemTheoDanhMuc = sanPhamService.TimKiemSanPhamTheoDanhMuc(category);
-		for (SanPham sanPham : TimKiemTheoDanhMuc) {
-			System.out.println(sanPham.getTenSanPham());
+		List<SanPham> TimKiemSanPham= null;
+		if (category != null && brand != null) {
+			TimKiemSanPham = sanPhamService.TimKiemSanPhamTheoDanhMucVaThuongHieu(category, brand);
+			modelMap.addAttribute("lstSPTimKiem", TimKiemSanPham);
+			return "store";
 		}
-		modelMap.addAttribute("lstSPTimKiemTheoDM", TimKiemTheoDanhMuc);
+		
+		if (category != null) {
+			TimKiemSanPham = sanPhamService.TimKiemSanPhamTheoDanhMuc(category);
+			modelMap.addAttribute("lstSPTimKiem", TimKiemSanPham);
+			return "store";
+		}
+		
+		if (brand != null) {
+			TimKiemSanPham = sanPhamService.TimKiemSanPhamTheoThuongHieu(brand);
+			modelMap.addAttribute("lstSPTimKiem", TimKiemSanPham);
+			return "store";
+		}
+		
+		if(from!=null && to!=null) {
+			TimKiemSanPham = sanPhamService.TimKiemSanPhamTheoGia(from, to);
+			modelMap.addAttribute("lstSPTimKiem", TimKiemSanPham);
+			return "store";
+		}
+		
+		if (category == null && brand == null && (from == null || to == null)) {
+			TimKiemSanPham = sanPhamService.GetListSanPham();
+			modelMap.addAttribute("lstSPTimKiem", TimKiemSanPham);
+			return "store";
+		}
+		
 		return "store";
 	}
 

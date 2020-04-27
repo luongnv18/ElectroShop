@@ -70,7 +70,7 @@
 										}
 									%>
 								</select> <input class="input" placeholder="Từ khóa">
-								<button class="search-btn">Tìm kiếm</button>
+								<button class="search-btn" type="submit">Tìm kiếm</button>
 							</form>
 						</div>
 					</div>
