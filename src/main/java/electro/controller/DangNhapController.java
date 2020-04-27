@@ -21,6 +21,7 @@ public class DangNhapController {
 	}
 	@Autowired
 	KhachHangService userService;
+	
 	@PostMapping
 	public String XuLyDangNhap(@RequestParam String username, @RequestParam String pass, ModelMap modelMap) {
 		if(userService.KiemTraDangNhap(username, pass)) {

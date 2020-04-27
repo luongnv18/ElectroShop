@@ -26,4 +26,7 @@ public class SanPhamService {
 	public List<Long> DemSPTheoTh(){
 		return sanphamDAO.DemSPTheoTH();
 	}
+	public List<SanPham> TimKiemSanPhamTheoDanhMuc(String key){
+		return sanphamDAO.TimKiemSanPhamTheoDanhMuc(key);
+	}
 }
