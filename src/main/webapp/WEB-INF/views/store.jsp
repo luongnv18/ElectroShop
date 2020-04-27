@@ -55,7 +55,8 @@
 		List<DanhMuc> lstdanhmuc = (List<DanhMuc>) request.getAttribute("lstDanhMuc");
 		List<SanPham> lstSanPham = (List<SanPham>) request.getAttribute("lstSanPham");
 		List<ThuongHieu> lstThuongHieu = (List<ThuongHieu>) request.getAttribute("lstThuongHieu");
-		List<Long> lstSoLuongTheoDM = (List<Long>) request.getAttribute("lstSoLuong");
+		List<Long> lstSoLuongTheoDM = (List<Long>) request.getAttribute("lstSoLuongTheoDM");
+		List<Long> lstSoLuongTheoTH = (List<Long>) request.getAttribute("lstSoLuongTheoTH");
 	%>
 	<!-- HEADER -->
 	<header>
@@ -304,11 +305,10 @@
 							<div class="input-checkbox">
 								<input type="checkbox" id="brand-<%=j%>" /> <label
 									for="brand-<%=j%>"> <span></span> <%=thuonghieu.getTenThuongHieu()%>
-									<small>(578)</small>
+									<small>(<%=lstSoLuongTheoTH.get(j-1)%>)</small>
 								</label>
 							</div>
 						</div>
-
 						<%
 							}
 						%>

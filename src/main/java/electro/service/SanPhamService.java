@@ -23,4 +23,7 @@ public class SanPhamService {
 	public List<Long> DemSPTheoDM(){
 		return sanphamDAO.DemSPTheoDM();
 	}
+	public List<Long> DemSPTheoTh(){
+		return sanphamDAO.DemSPTheoTH();
+	}
 }
