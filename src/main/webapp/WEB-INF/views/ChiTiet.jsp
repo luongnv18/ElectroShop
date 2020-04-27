@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="electro.entity.GioHang"%>
+<%@page import="electro.entity.ChiTietSanPham"%>
 <%@page import="electro.entity.SanPham"%>
 <%@page import="electro.entity.DanhMuc"%>
 <%@page import="java.util.List"%>
@@ -52,150 +55,14 @@
 <body>
 	<%
 		SanPham sanPham = (SanPham) request.getAttribute("sanPham");
-		List<DanhMuc> lstDanhMucs = (List<DanhMuc>) request.getAttribute("lstDanhMuc");
+		List<GioHang> lstGioHangs=new ArrayList();
+		if(request.getAttribute("lstGioHang")!=null){
+			lstGioHangs=(List<GioHang>)request.getAttribute("lstGioHang");
+		}
+
 	%>
-	<!-- HEADER -->
-	<header>
-		<!-- TOP HEADER -->
-		<div id="top-header">
-			<div class="container">
-				<ul class="header-links pull-left">
-					<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-					<li><a href="#"><i class="fa fa-envelope-o"></i>
-							email@email.com</a></li>
-					<li><a href="#"><i class="fa fa-map-marker"></i> 1734
-							Stonecoal Road</a></li>
-				</ul>
-				<ul class="header-links pull-right">
-					<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-					<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- /TOP HEADER -->
 
-		<!-- MAIN HEADER -->
-		<div id="header">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<!-- LOGO -->
-					<div class="col-md-3">
-						<div class="header-logo">
-							<a href="/ElectroShop" class="logo"> <img
-								src="<c:url value="/resources/img/logo.png"/>" alt="">
-							</a>
-						</div>
-					</div>
-					<!-- /LOGO -->
-
-					<!-- SEARCH BAR -->
-					<div class="col-md-6">
-						<div class="header-search">
-							<form>
-								<select class="input-select">
-									<option value="0">All Categories</option>
-									<%
-										for (DanhMuc dm : lstDanhMucs) {
-									%>
-									<option value="1"><%=dm.getTenDanhMuc()%></option>
-									<%
-										}
-									%>
-								</select> <input class="input" placeholder="Từ khóa">
-								<button class="search-btn">Tìm kiếm</button>
-							</form>
-						</div>
-					</div>
-					<!-- /SEARCH BAR -->
-
-					<!-- ACCOUNT -->
-					<div class="col-md-3 clearfix">
-						<div class="header-ctn">
-							<!-- Wishlist -->
-							<div>
-								<a href="#"> <i class="fa fa-heart-o"></i> <span>Your
-										Wishlist</span>
-									<div class="qty">2</div>
-								</a>
-							</div>
-							<!-- /Wishlist -->
-
-							<!-- Cart -->
-							<div class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown"
-									aria-expanded="true"> <i class="fa fa-shopping-cart"></i> <span>Your
-										Cart</span>
-									<div class="qty">3</div>
-								</a>
-								<div class="cart-dropdown">
-									<div class="cart-list">
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="<c:url value="/resources/img/product01.png"/>"
-													alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name">
-													<a href="#">product name goes here</a>
-												</h3>
-												<h4 class="product-price">
-													<span class="qty">1x</span>$980.00
-												</h4>
-											</div>
-											<button class="delete">
-												<i class="fa fa-close"></i>
-											</button>
-										</div>
-
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="<c:url value="/resources/img/product02.png"/>"
-													alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name">
-													<a href="#">product name goes here</a>
-												</h3>
-												<h4 class="product-price">
-													<span class="qty">3x</span>$980.00
-												</h4>
-											</div>
-											<button class="delete">
-												<i class="fa fa-close"></i>
-											</button>
-										</div>
-									</div>
-									<div class="cart-summary">
-										<small>3 Item(s) selected</small>
-										<h5>SUBTOTAL: $2940.00</h5>
-									</div>
-									<div class="cart-btns">
-										<a href="#">View Cart</a> <a href="#">Checkout <i
-											class="fa fa-arrow-circle-right"></i></a>
-									</div>
-								</div>
-							</div>
-							<!-- /Cart -->
-
-							<!-- Menu Toogle -->
-							<div class="menu-toggle">
-								<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
-								</a>
-							</div>
-							<!-- /Menu Toogle -->
-						</div>
-					</div>
-					<!-- /ACCOUNT -->
-				</div>
-				<!-- row -->
-			</div>
-			<!-- container -->
-		</div>
-		<!-- /MAIN HEADER -->
-	</header>
-	<!-- /HEADER -->
+	<jsp:include page="header.jsp"></jsp:include>
 
 	<!-- NAVIGATION -->
 	<nav id="navigation">
@@ -280,7 +147,7 @@
 				<!-- Product details -->
 				<div class="col-md-5">
 					<div class="product-details">
-						<h2 class="product-name">${sanPham.getTenSanPham()}</h2>
+						<h2 class="product-name sanpham-chitiet" data-masp=${sanPham.getIdSanPham() } data-giasp=${sanPham.getGia() }>${sanPham.getTenSanPham()}</h2>
 						<div>
 							<div class="product-rating">
 								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -309,19 +176,20 @@
 							</label> <label> Color <select class="input-select">
 									<option value="0">Red</option>
 							</select>
+							
 							</label>
 						</div>
 
 						<div class="add-to-cart">
 							<div class="qty-label">
-								Qty
+								Số lượng
 								<div class="input-number">
-									<input type="number"> <span class="qty-up">+</span> <span
+									<input type="number" value="1"> <span class="qty-up">+</span> <span
 										class="qty-down">-</span>
 								</div>
 							</div>
-							<button class="add-to-cart-btn">
-								<i class="fa fa-shopping-cart"></i> add to cart
+							<button class="add-to-cart-btn btn-giohang">
+								<i class="fa fa-shopping-cart"></i> Thêm vào giỏ
 							</button>
 						</div>
 
@@ -900,6 +768,7 @@
 	<script src="<c:url value="/resources/js/nouislider.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/jquery.zoom.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/main.js"/>"></script>
+	<script src="<c:url value="/resources/js/custom.js"/>"></script>
 
 </body>
 </html>

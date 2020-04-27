@@ -4,12 +4,14 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import net.bytebuddy.asm.Advice.This;
@@ -40,6 +42,17 @@ public class SanPham {
 		inverseJoinColumns = {@JoinColumn(name="IdKhuyenMai",referencedColumnName = "IdKhuyenMai")})
 	Set<KhuyenMai> lstKhuyenMai;
 	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="IdSanPham")
+	Set<ChiTietSanPham> lstChiTietSanPham;
+
+	public Set<ChiTietSanPham> getLstChiTietSanPham() {
+		return lstChiTietSanPham;
+	}
+
+	public void setLstChiTietSanPham(Set<ChiTietSanPham> lstChiTietSanPham) {
+		this.lstChiTietSanPham = lstChiTietSanPham;
+	}
 
 	public Set<KhuyenMai> getLstKhuyenMai() {
 		return lstKhuyenMai;

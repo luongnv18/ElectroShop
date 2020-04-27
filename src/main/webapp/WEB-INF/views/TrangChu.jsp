@@ -55,154 +55,7 @@
 		List<DanhMuc> lstdanhmuc = (List<DanhMuc>) request.getAttribute("lstDanhMuc");
 		List<SanPham> lstSP = (List<SanPham>) request.getAttribute("lstSanPham");
 	%>
-	<!-- HEADER -->
-	<header>
-		<!-- TOP HEADER -->
-		<div id="top-header">
-			<div class="container">
-				<ul class="header-links pull-left">
-					<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-					<li><a href="#"><i class="fa fa-envelope-o"></i>
-							email@email.com</a></li>
-					<li><a href="#"><i class="fa fa-map-marker"></i> 236 Hoàng
-							Quốc Việt, Cầu Giấy, Hà Nội</a></li>
-				</ul>
-				<ul class="header-links pull-right">
-					<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-					<%
-						String email = "Đăng Nhập";
-						if (request.getAttribute("email") != null)
-							email = "Xin chào " + request.getAttribute("email").toString();
-					%>
-					<li><a href="dangnhap"><i class="fa fa-user-o"></i><%=email%></a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- /TOP HEADER -->
-
-		<!-- MAIN HEADER -->
-		<div id="header">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<!-- LOGO -->
-					<div class="col-md-3">
-						<div class="header-logo">
-							<a href="./" class="logo"> <img
-								src="<c:url value="/resources/img/logo.png/"/>" alt="">
-							</a>
-						</div>
-					</div>
-					<!-- /LOGO -->
-
-					<!-- SEARCH BAR -->
-					<div class="col-md-6">
-						<div class="header-search">
-							<form>
-								<select class="input-select">
-									<option value="0">Tất cả sản phẩm</option>
-									<%
-										for (DanhMuc dm : lstdanhmuc) {
-									%>
-									<option value="1"><%=dm.getTenDanhMuc()%></option>
-									<%
-										}
-									%>
-								</select> <input class="input" placeholder="Từ khóa">
-								<button class="search-btn">Tìm kiếm</button>
-							</form>
-						</div>
-					</div>
-					<!-- /SEARCH BAR -->
-
-					<!-- ACCOUNT -->
-					<div class="col-md-3 clearfix">
-						<div class="header-ctn">
-							<!-- Wishlist -->
-							<div>
-								<a href="#"> <i class="fa fa-heart-o"></i> <span>Yêu
-										thích</span>
-									<div class="qty">2</div>
-								</a>
-							</div>
-							<!-- /Wishlist -->
-
-							<!-- Cart -->
-							<div class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown"
-									aria-expanded="true"> <i class="fa fa-shopping-cart"></i> <span>Giỏ
-										hàng</span>
-									<div class="qty">3</div>
-								</a>
-								<div class="cart-dropdown">
-									<div class="cart-list">
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="<c:url value="/resources/img/product01.png"/>"
-													alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name">
-													<a href="#">product name goes here</a>
-												</h3>
-												<h4 class="product-price">
-													<span class="qty">1x</span>$980.00
-												</h4>
-											</div>
-											<button class="delete">
-												<i class="fa fa-close"></i>
-											</button>
-										</div>
-
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="<c:url value="/resources/img/product02.png"/>"
-													alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name">
-													<a href="#">product name goes here</a>
-												</h3>
-												<h4 class="product-price">
-													<span class="qty">3x</span>$980.00
-												</h4>
-											</div>
-											<button class="delete">
-												<i class="fa fa-close"></i>
-											</button>
-										</div>
-									</div>
-									<div class="cart-summary">
-										<small>3 Item(s) selected</small>
-										<h5>SUBTOTAL: $2940.00</h5>
-									</div>
-									<div class="cart-btns">
-										<a href="#">View Cart</a> <a href="#">Checkout <i
-											class="fa fa-arrow-circle-right"></i></a>
-									</div>
-								</div>
-							</div>
-							<!-- /Cart -->
-
-							<!-- Menu Toogle -->
-							<div class="menu-toggle">
-								<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
-								</a>
-							</div>
-							<!-- /Menu Toogle -->
-						</div>
-					</div>
-					<!-- /ACCOUNT -->
-				</div>
-				<!-- row -->
-			</div>
-			<!-- container -->
-		</div>
-		<!-- /MAIN HEADER -->
-	</header>
-	<!-- /HEADER -->
-
+	<jsp:include page="header.jsp"></jsp:include>
 	<!-- NAVIGATION -->
 	<nav id="navigation">
 		<!-- container -->
@@ -365,8 +218,9 @@
 												</button>
 											</div>
 										</div>
-										<div class="add-to-cart">
-											<button class="add-to-cart-btn">
+										<div class="add-to-cart" >
+											<button class="add-to-cart-btn btn-giohang-trangchu" data-masp=<%=sp.getIdSanPham()%> data-giasp=<%=sp.getGia() %>>
+												<span class="the-an"><%=sp.getTenSanPham() %></span>
 												<i class="fa fa-shopping-cart"></i> add to cart
 											</button>
 										</div>
@@ -1227,6 +1081,7 @@
 	<script src="<c:url value="/resources/js/nouislider.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/jquery.zoom.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/main.js"/>"></script>
+	<script src="<c:url value="/resources/js/custom.js"/>"></script>
 
 </body>
 </html>

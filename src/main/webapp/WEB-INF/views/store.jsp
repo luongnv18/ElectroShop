@@ -378,7 +378,7 @@
 							<div class="product">
 								<a href="ChiTiet/<%=sp.getIdSanPham()%>">
 									<div class="product-img">
-										<img src="<c:url value="<%=sp.getImage()%>"/>" alt="">
+										<img src="<c:url value="<%=sp.GetListImage()[0]%>"/>" alt="">
 										<div class="product-label">
 											<span class="sale">-30%</span> <span class="new">NEW</span>
 										</div>

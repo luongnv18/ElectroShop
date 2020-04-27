@@ -30,7 +30,7 @@ public class DangNhapController {
 		}
 		else {
 			//dang nhap that bai
-			return "redirect:dangnhap";
+			return "redirect:DangNhap";
 		}
 		
 	}
