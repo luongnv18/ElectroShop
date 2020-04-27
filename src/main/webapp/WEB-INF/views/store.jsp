@@ -57,6 +57,7 @@
 		List<ThuongHieu> lstThuongHieu = (List<ThuongHieu>) request.getAttribute("lstThuongHieu");
 		List<Long> lstSoLuongTheoDM = (List<Long>) request.getAttribute("lstSoLuongTheoDM");
 		List<Long> lstSoLuongTheoTH = (List<Long>) request.getAttribute("lstSoLuongTheoTH");
+		List<SanPham> lstSPTheoDM = (List<SanPham>) request.getAttribute("lstSPTimKiemTheoDM");
 	%>
 	<!-- HEADER -->
 	<header>
@@ -254,6 +255,7 @@
 					<!-- aside Widget -->
 					<div class="aside">
 						<h3 class="aside-title">Loại sản phẩm</h3>
+						<form method="get">
 						<div class="checkbox-filter">
 							<%
 								int i = 0;
@@ -262,16 +264,19 @@
 							%>
 
 							<div class="input-checkbox">
-								<input type="checkbox" id="category-<%=i%>"> <label
-									for="category-<%=i%>"> <span></span> <%=danhmuc.getTenDanhMuc()%>
+								<input type="checkbox" id="category-<%=i%>" name="category" value="<%=danhmuc.getIdDanhMuc()%>"> 
+								<label for="category-<%=i%>"> 
+									<span></span><%=danhmuc.getTenDanhMuc()%>
 									<small>(<%=lstSoLuongTheoDM.get(i-1)%>)</small>
 								</label>
+								
 							</div>
-
 							<%
 								}
 							%>
+							<input type="submit" value="Ok" />
 						</div>
+						</form>
 					</div>
 					<!-- /aside Widget -->
 
@@ -319,7 +324,7 @@
 					<div class="aside">
 						<h3 class="aside-title">Sản phẩm bán chạy</h3>
 						<%
-							for (SanPham sp : lstSanPham) {
+							for (SanPham sp : lstSPTheoDM) {
 						%>
 						<div class="product-widget">
 							<a href="ChiTiet/<%=sp.getIdSanPham()%>">
@@ -372,7 +377,7 @@
 
 					<div class="row">
 						<%
-							for (SanPham sp : lstSanPham) {
+							for (SanPham sp : lstSPTheoDM) {
 						%>
 						<!-- product -->
 						<div class="col-md-4 col-xs-6">

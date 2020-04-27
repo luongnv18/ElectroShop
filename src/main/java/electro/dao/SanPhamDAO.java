@@ -46,4 +46,12 @@ public class SanPhamDAO {
 		List<Long> lstSoLuongTheoTH = session.createQuery(sql).list();
 		return lstSoLuongTheoTH;
 	}
+	
+	@Transactional
+	public List<SanPham> TimKiemSanPhamTheoDanhMuc(String key){
+		Session session=sessionFactory.getCurrentSession();
+		String sql="from SanPham sp where sp.danhMuc.IdDanhMuc IN ("+key+")";
+		List<SanPham> resultList = session.createQuery(sql).getResultList();
+		return resultList;
+	}
 }
