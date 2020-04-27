@@ -35,7 +35,15 @@ public class SanPhamDAO {
 	public List<Long> DemSPTheoDM(){
 		Session session=sessionFactory.getCurrentSession();
 		String sql="select count(sp.IdSanPham) from SanPham sp inner join DanhMuc dm on sp.danhMuc.IdDanhMuc = dm.IdDanhMuc group by sp.danhMuc.IdDanhMuc";
-		List<Long> lstSoLuongTheoDM = session.createQuery(sql).list();
+		List<Long> lstSoLuongTheoDM = session.createQuery(sql).getResultList();
 		return lstSoLuongTheoDM;
+	}
+	
+	@Transactional
+	public List<Long> DemSPTheoTH(){
+		Session session=sessionFactory.getCurrentSession();
+		String sql="select count(sp.IdSanPham) from SanPham sp inner join ThuongHieu th on sp.thuongHieu.IdThuongHieu = th.IdThuongHieu group by sp.thuongHieu.IdThuongHieu";
+		List<Long> lstSoLuongTheoTH = session.createQuery(sql).list();
+		return lstSoLuongTheoTH;
 	}
 }

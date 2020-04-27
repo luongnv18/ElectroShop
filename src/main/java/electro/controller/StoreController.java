@@ -34,11 +34,13 @@ public class StoreController {
 		List<DanhMuc> lstDanhMucs= danhMucSPService.GetListDanhMuc();
 		List<SanPham> lstSanPhams = sanPhamService.GetListSanPham();
 		List<ThuongHieu> lstThuongHieus = thuongHieuSPService.GetListThuongHieu();
-		List<Long> lstSoLuong = sanPhamService.DemSPTheoDM();
+		List<Long> lstSoLuongTheoDM = sanPhamService.DemSPTheoDM();
+		List<Long> lstSoLuongTheoTH = sanPhamService.DemSPTheoTh();
 		modelMap.addAttribute("lstDanhMuc",lstDanhMucs);
 		modelMap.addAttribute("lstSanPham", lstSanPhams);
 		modelMap.addAttribute("lstThuongHieu", lstThuongHieus);
-		modelMap.addAttribute("lstSoLuong", lstSoLuong);
+		modelMap.addAttribute("lstSoLuongTheoDM", lstSoLuongTheoDM);
+		modelMap.addAttribute("lstSoLuongTheoTH", lstSoLuongTheoTH);
 		return "store";
 	}
 }
