@@ -38,4 +38,10 @@ public class SanPhamService {
 	public List<SanPham> TimKiemSanPhamTheoGia(String from, String to){
 		return sanphamDAO.TimKiemSanPhamTheoGia(from, to);
 	}
+	public List<SanPham> TimKiemSanPhamTheoTen(String name){
+		return sanphamDAO.TimKiemSanPhamTheoTen(name);
+	}
+	public List<SanPham> TimKiemSanPhamTheoTenVaDanhMuc(String name, String category){
+		return sanphamDAO.TimKiemSanPhamTheoTenVaDanhMuc(name,category);
+	}
 }

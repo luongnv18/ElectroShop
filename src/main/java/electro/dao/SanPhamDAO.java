@@ -83,4 +83,26 @@ public class SanPhamDAO {
 		resultList = session.createQuery(sql).getResultList();
 		return resultList;
 	}
+	
+	@Transactional
+	public List<SanPham> TimKiemSanPhamTheoTen(String key){
+		Session session = sessionFactory.getCurrentSession();
+		List<SanPham> resultList;
+		String sql = "from SanPham sp where sp.TenSanPham like :key";
+		Query query = session.createQuery(sql);
+		query.setParameter("key", "%"+key+"%");
+		resultList = query.getResultList();
+		return resultList;
+	}
+
+	@Transactional
+	public List<SanPham> TimKiemSanPhamTheoTenVaDanhMuc(String name, String category){
+		Session session = sessionFactory.getCurrentSession();
+		List<SanPham> resultList;
+		String sql = "from SanPham sp where sp.TenSanPham like :name AND sp.danhMuc.IdDanhMuc ="+category+"";
+		Query query = session.createQuery(sql);
+		query.setParameter("name", "%"+name+"%");
+		resultList = query.getResultList();
+		return resultList;
+	}
 }
