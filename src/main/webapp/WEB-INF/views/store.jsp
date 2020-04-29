@@ -101,19 +101,19 @@
 	<!-- /BREADCRUMB -->
 
 	<!-- SECTION -->
-	<div class="section">
-		<!-- container -->
-		<div class="container">
-			<!-- row -->
-			<div class="row">
-				
-				<!-- ASIDE -->
-				<form method="get">
-				<div id="aside" class="col-md-3">
-					<!-- aside Widget -->
-					<div class="aside">
-						<h3 class="aside-title">Loại sản phẩm</h3>
-						
+	<form method="get">
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- ASIDE -->
+					<div id="aside" class="col-md-3">
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Loại sản phẩm</h3>
+
 							<div class="checkbox-filter">
 								<%
 									int i = 0;
@@ -135,31 +135,31 @@
 								%>
 								<button class="search-btn-2" type="submit">Tìm kiếm</button>
 							</div>
-						</form>
-					</div>
-					<!-- /aside Widget -->
 
-					<!-- aside Widget -->
-					<div class="aside">
-						<h3 class="aside-title">Giá</h3>
-						<div class="price-filter">
-							<div id="price-slider"></div>
-							<div class="input-number">
-								<input type="number" placeholder="Từ" name="price-from"> <span
-									class="qty-up">+</span> <span class="qty-down">-</span>
-							</div>
-							<span>-</span>
-							<div class="input-number">
-								<input type="number" placeholder="Đến" name="price-to"> <span
-									class="qty-up">+</span> <span class="qty-down">-</span>
+						</div>
+						<!-- /aside Widget -->
+
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Giá</h3>
+							<div class="price-filter">
+								<div id="price-slider"></div>
+								<div class="input-number">
+									<input type="number" placeholder="Từ" name="price-from">
+									<span class="qty-up">+</span> <span class="qty-down">-</span>
+								</div>
+								<span>-</span>
+								<div class="input-number">
+									<input type="number" placeholder="Đến" name="price-to">
+									<span class="qty-up">+</span> <span class="qty-down">-</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					<!-- /aside Widget -->
+						<!-- /aside Widget -->
 
-					<!-- aside Widget -->
-					<div class="aside">
-						<h3 class="aside-title">Thương hiệu</h3>
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Thương hiệu</h3>
 							<%
 								int j = 0;
 								for (ThuongHieu thuonghieu : lstThuongHieu) {
@@ -179,147 +179,152 @@
 								}
 							%>
 							<button class="search-btn-2" type="submit">Tìm kiếm</button>
-					</div>
-					<!-- /aside Widget -->
-
-					<!-- aside Widget -->
-					<div class="aside">
-						<h3 class="aside-title">Sản phẩm bán chạy</h3>
-						<%
-							for (SanPham sp : lstSanPham) {
-						%>
-						<div class="product-widget">
-							<a href="ChiTiet/<%=sp.getIdSanPham()%>">
-								<div class="product-img">
-									<img src="<c:url value="<%=sp.GetListImage()[0]%>"/>" alt="">
-								</div>
-							</a>
-							<div class="product-body">
-								<p class="product-category"><%=sp.getThuongHieu().getTenThuongHieu()%></p>
-								<h3 class="product-name">
-									<a href="ChiTiet/<%=sp.getIdSanPham()%>"><%=sp.getTenSanPham()%></a>
-								</h3>
-								<h4 class="product-price">
-									<%=sp.getGia()%>
-									<del class="product-old-price"><%=sp.getGia()%></del>
-								</h4>
-							</div>
 						</div>
-						<%
-							}
-						%>
-					</div>
-					<!-- /aside Widget -->
-				</div>
-				</form>
-				<!-- /ASIDE -->
-				
-				<!-- STORE -->
-				<div id="store" class="col-md-9">
-					<!-- store top filter -->
-					<div class="store-filter clearfix">
-						<div class="store-sort">
-							<label> Sort By: <select class="input-select">
-									<option value="0">Popular</option>
-									<option value="1">Position</option>
-							</select>
-							</label> <label> Show: <select class="input-select">
-									<option value="0">20</option>
-									<option value="1">50</option>
-							</select>
-							</label>
-						</div>
-						<ul class="store-grid">
-							<li class="active"><i class="fa fa-th"></i></li>
-							<li><a href="#"><i class="fa fa-th-list"></i></a></li>
-						</ul>
-					</div>
-					<!-- /store top filter -->
+						<!-- /aside Widget -->
 
-					<!-- store products -->
-
-					<div class="row">
-						<%
-							for (SanPham sp : lstSPTimKiem) {
-						%>
-						<!-- product -->
-						<div class="col-md-4 col-xs-6">
-							<div class="product">
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Sản phẩm bán chạy</h3>
+							<%
+								for (SanPham sp : lstSanPham) {
+							%>
+							<div class="product-widget">
 								<a href="ChiTiet/<%=sp.getIdSanPham()%>">
 									<div class="product-img">
 										<img src="<c:url value="<%=sp.GetListImage()[0]%>"/>" alt="">
-										<div class="product-label">
-											<span class="sale">-30%</span> <span class="new">NEW</span>
-										</div>
 									</div>
 								</a>
 								<div class="product-body">
-									<p class="product-category">Category</p>
+									<p class="product-category"><%=sp.getThuongHieu().getTenThuongHieu()%></p>
 									<h3 class="product-name">
-										<a href="ChiTiet/<%=sp.getIdSanPham()%>"> <%=sp.getTenSanPham()%></a>
+										<a href="ChiTiet/<%=sp.getIdSanPham()%>"><%=sp.getTenSanPham()%></a>
 									</h3>
 									<h4 class="product-price">
 										<%=sp.getGia()%>
 										<del class="product-old-price"><%=sp.getGia()%></del>
 									</h4>
-									<div class="product-rating">
-										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i>
-									</div>
-									<div class="product-btns">
-										<button class="add-to-wishlist">
-											<i class="fa fa-heart-o"></i><span class="tooltipp">add
-												to wishlist</span>
-										</button>
-										<button class="add-to-compare">
-											<i class="fa fa-exchange"></i><span class="tooltipp">add
-												to compare</span>
-										</button>
-										<button class="quick-view">
-											<i class="fa fa-eye"></i><span class="tooltipp">quick
-												view</span>
-										</button>
-									</div>
-								</div>
-								<div class="add-to-cart">
-									<button class="add-to-cart-btn btn-giohang-trangchu"
-										data-masp=<%=sp.getIdSanPham()%> data-giasp=<%=sp.getGia()%>>
-										<span class="the-an"><%=sp.getTenSanPham()%></span> <i
-											class="fa fa-shopping-cart"></i> add to cart
-									</button>
 								</div>
 							</div>
+							<%
+								}
+							%>
 						</div>
-						<!-- /product -->
-
-						<div class="clearfix visible-sm visible-xs"></div>
-						<%
-							}
-						%>
+						<!-- /aside Widget -->
 					</div>
-					<!-- /store products -->
 
-					<!-- store bottom filter -->
-					<div class="store-filter clearfix">
-						<span class="store-qty">Showing 20-100 products</span>
-						<ul class="store-pagination">
-							<li class="active">1</li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-						</ul>
+					<!-- /ASIDE -->
+
+					<!-- STORE -->
+					<div id="store" class="col-md-9">
+						<!-- store top filter -->
+						<div class="store-filter clearfix">
+							<div class="store-sort">
+
+								<label> Sắp xếp: <select class="input-select" id="sort"
+									name="sort">
+										<option value="0">--- Chọn ---</option>
+										<option value="1">Mới nhất</option>
+										<option value="2">Bán chạy nhất</option>
+										<option value="3">Giá từ thấp đến cao</option>
+										<option value="4">Giá từ cao đến thấp</option>
+								</select>
+								</label> <label> Hiển thị: <select class="input-select"
+									name="show">
+										<option value="0">20 sản phẩm</option>
+										<option value="1">50 sản phẩm</option>
+										<option value="2">100 sản phẩm</option>
+								</select>
+								</label>
+
+							</div>
+						</div>
+						<!-- /store top filter -->
+
+						<!-- store products -->
+
+						<div class="row">
+							<%
+								for (SanPham sp : lstSPTimKiem) {
+							%>
+							<!-- product -->
+							<div class="col-md-4 col-xs-6">
+								<div class="product">
+									<a href="ChiTiet/<%=sp.getIdSanPham()%>">
+										<div class="product-img">
+											<img src="<c:url value="<%=sp.GetListImage()[0]%>"/>" alt="">
+											<div class="product-label">
+												<span class="sale">-30%</span> <span class="new">NEW</span>
+											</div>
+										</div>
+									</a>
+									<div class="product-body">
+										<p class="product-category">Category</p>
+										<h3 class="product-name">
+											<a href="ChiTiet/<%=sp.getIdSanPham()%>"> <%=sp.getTenSanPham()%></a>
+										</h3>
+										<h4 class="product-price">
+											<%=sp.getGia()%>
+											<del class="product-old-price"><%=sp.getGia()%></del>
+										</h4>
+										<div class="product-rating">
+											<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+												class="fa fa-star"></i>
+										</div>
+										<div class="product-btns">
+											<button class="add-to-wishlist">
+												<i class="fa fa-heart-o"></i><span class="tooltipp">add
+													to wishlist</span>
+											</button>
+											<button class="add-to-compare">
+												<i class="fa fa-exchange"></i><span class="tooltipp">add
+													to compare</span>
+											</button>
+											<button class="quick-view">
+												<i class="fa fa-eye"></i><span class="tooltipp">quick
+													view</span>
+											</button>
+										</div>
+									</div>
+									<div class="add-to-cart">
+										<button class="add-to-cart-btn btn-giohang-trangchu"
+											data-masp=<%=sp.getIdSanPham()%> data-giasp=<%=sp.getGia()%>>
+											<span class="the-an"><%=sp.getTenSanPham()%></span> <i
+												class="fa fa-shopping-cart"></i> add to cart
+										</button>
+									</div>
+								</div>
+							</div>
+							<!-- /product -->
+
+							<div class="clearfix visible-sm visible-xs"></div>
+							<%
+								}
+							%>
+						</div>
+						<!-- /store products -->
+
+						<!-- store bottom filter -->
+						<div class="store-filter clearfix">
+							<span class="store-qty">Showing 20-100 products</span>
+							<ul class="store-pagination">
+								<li class="active">1</li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+							</ul>
+						</div>
+						<!-- /store bottom filter -->
 					</div>
-					<!-- /store bottom filter -->
+					<!-- /STORE -->
 				</div>
-				<!-- /STORE -->
+				<!-- /row -->
 			</div>
-			<!-- /row -->
+			<!-- /container -->
 		</div>
-		<!-- /container -->
-	</div>
-	<!-- /SECTION -->
+		<!-- /SECTION -->
+	</form>
 
 	<!-- NEWSLETTER -->
 	<div id="newsletter" class="section">
@@ -455,12 +460,27 @@
 
 	<!-- jQuery Plugins -->
 	<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/jquery.session.js"/>"></script>
 	<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/slick.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/nouislider.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/jquery.zoom.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/main.js"/>"></script>
 	<script src="<c:url value="/resources/js/custom.js"/>"></script>
+	
+	<script>
+		$(document).ready(function() {
+			$('#sort').change(function() {
+				$.session.set('#sort', $('#sort').val());
+				$(this).parents("form").submit();
+			})
+		});
 
+		$(function () { 
+			if($.session.get('#sort')!=null)
+				$('#sort').val($.session.get('#sort'));
+
+        });
+	</script>
 </body>
 </html>

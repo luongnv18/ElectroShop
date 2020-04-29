@@ -56,7 +56,7 @@ public class SanPhamDAO {
 		resultList = session.createQuery(sql).getResultList();
 		return resultList;
 	}
-	
+
 	@Transactional
 	public List<SanPham> TimKiemSanPhamTheoThuongHieu(String key) {
 		Session session = sessionFactory.getCurrentSession();
@@ -65,43 +65,74 @@ public class SanPhamDAO {
 		resultList = session.createQuery(sql).getResultList();
 		return resultList;
 	}
-	
+
 	@Transactional
 	public List<SanPham> TimKiemSanPhamTheoThuongHieuVaDanhMuc(String dm, String th) {
 		Session session = sessionFactory.getCurrentSession();
 		List<SanPham> resultList;
-		String sql = "from SanPham sp where sp.thuongHieu.IdThuongHieu IN (" + th + ") AND sp.danhMuc.IdDanhMuc IN ("+ dm +")";
+		String sql = "from SanPham sp where sp.thuongHieu.IdThuongHieu IN (" + th + ") AND sp.danhMuc.IdDanhMuc IN ("
+				+ dm + ")";
 		resultList = session.createQuery(sql).getResultList();
 		return resultList;
 	}
-	
+
 	@Transactional
 	public List<SanPham> TimKiemSanPhamTheoGia(String from, String to) {
 		Session session = sessionFactory.getCurrentSession();
 		List<SanPham> resultList;
-		String sql = "from SanPham sp where (sp.Gia >= "+from+") AND (sp.Gia <= "+to+") ";
+		String sql = "from SanPham sp where (sp.Gia >= " + from + ") AND (sp.Gia <= " + to + ") ";
 		resultList = session.createQuery(sql).getResultList();
 		return resultList;
 	}
-	
+
 	@Transactional
-	public List<SanPham> TimKiemSanPhamTheoTen(String key){
+	public List<SanPham> TimKiemSanPhamTheoTen(String key) {
 		Session session = sessionFactory.getCurrentSession();
 		List<SanPham> resultList;
 		String sql = "from SanPham sp where sp.TenSanPham like :key";
 		Query query = session.createQuery(sql);
-		query.setParameter("key", "%"+key+"%");
+		query.setParameter("key", "%" + key + "%");
 		resultList = query.getResultList();
 		return resultList;
 	}
 
 	@Transactional
-	public List<SanPham> TimKiemSanPhamTheoTenVaDanhMuc(String name, String category){
+	public List<SanPham> TimKiemSanPhamTheoTenVaDanhMuc(String name, String category) {
 		Session session = sessionFactory.getCurrentSession();
 		List<SanPham> resultList;
-		String sql = "from SanPham sp where sp.TenSanPham like :name AND sp.danhMuc.IdDanhMuc ="+category+"";
+		String sql = "from SanPham sp where sp.TenSanPham like :name AND sp.danhMuc.IdDanhMuc =" + category + "";
 		Query query = session.createQuery(sql);
-		query.setParameter("name", "%"+name+"%");
+		query.setParameter("name", "%" + name + "%");
+		resultList = query.getResultList();
+		return resultList;
+	}
+
+	@Transactional
+	public List<SanPham> SapXepSanPhamTheoNgayNhap() {
+		Session session = sessionFactory.getCurrentSession();
+		List<SanPham> resultList;
+		String sql = "select sp from SanPham sp inner join ChiTietSanPham ct on sp.IdSanPham = ct.sanPham.IdSanPham order by ct.NgayNhap desc";
+		Query query = session.createQuery(sql);
+		resultList = query.getResultList();
+		return resultList;
+	}
+	
+	@Transactional
+	public List<SanPham> SapXepSanPhamTheoGiaTuThapDenCao() {
+		Session session = sessionFactory.getCurrentSession();
+		List<SanPham> resultList;
+		String sql = "select sp from SanPham sp order by sp.Gia";
+		Query query = session.createQuery(sql);
+		resultList = query.getResultList();
+		return resultList;
+	}
+	
+	@Transactional
+	public List<SanPham> SapXepSanPhamTheoGiaTuCaoDenThap() {
+		Session session = sessionFactory.getCurrentSession();
+		List<SanPham> resultList;
+		String sql = "select sp from SanPham sp order by sp.Gia desc";
+		Query query = session.createQuery(sql);
 		resultList = query.getResultList();
 		return resultList;
 	}

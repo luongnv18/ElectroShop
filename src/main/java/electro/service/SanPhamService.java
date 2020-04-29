@@ -44,4 +44,13 @@ public class SanPhamService {
 	public List<SanPham> TimKiemSanPhamTheoTenVaDanhMuc(String name, String category){
 		return sanphamDAO.TimKiemSanPhamTheoTenVaDanhMuc(name,category);
 	}
+	public List<SanPham> SapXepSanPhamTheoNgayNhap(){
+		return sanphamDAO.SapXepSanPhamTheoNgayNhap();
+	}
+	public List<SanPham> SapXepSanPhamTheoGiaTuThapDenCao(){
+		return sanphamDAO.SapXepSanPhamTheoGiaTuThapDenCao();
+	}
+	public List<SanPham> SapXepSanPhamTheoGiaTuCaoDenThap(){
+		return sanphamDAO.SapXepSanPhamTheoGiaTuCaoDenThap();
+	}
 }
