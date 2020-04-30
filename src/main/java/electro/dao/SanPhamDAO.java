@@ -116,7 +116,7 @@ public class SanPhamDAO {
 		resultList = query.getResultList();
 		return resultList;
 	}
-	
+
 	@Transactional
 	public List<SanPham> SapXepSanPhamTheoGiaTuThapDenCao() {
 		Session session = sessionFactory.getCurrentSession();
@@ -126,7 +126,7 @@ public class SanPhamDAO {
 		resultList = query.getResultList();
 		return resultList;
 	}
-	
+
 	@Transactional
 	public List<SanPham> SapXepSanPhamTheoGiaTuCaoDenThap() {
 		Session session = sessionFactory.getCurrentSession();
@@ -136,4 +136,5 @@ public class SanPhamDAO {
 		resultList = query.getResultList();
 		return resultList;
 	}
+	
 }
