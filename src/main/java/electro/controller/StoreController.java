@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import electro.entity.DanhMuc;
 import electro.entity.SanPham;
@@ -17,7 +18,7 @@ import electro.service.SanPhamService;
 import electro.service.ThuongHieuSPService;
 
 @Controller
-@SessionAttributes({ "email", "giohang" })
+@SessionAttributes({ "user", "giohang" })
 @RequestMapping("/SanPham")
 public class StoreController {
 
