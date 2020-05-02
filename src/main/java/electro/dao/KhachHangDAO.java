@@ -14,17 +14,17 @@ public class KhachHangDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 	@Transactional
-	public boolean KiemTraDangNhap(String username, String pass) {
+	public KhachHang KiemTraDangNhap(String username, String pass) {
 		Session session=sessionFactory.getCurrentSession();
 		String sql="from KhachHang where TenDangNhap='"+username+"' AND MatKhau='"+pass+"'";
+		KhachHang kh=null;
 		try {
-			KhachHang user= (KhachHang)session.createQuery(sql).getSingleResult();
-			if(user!=null) {
-				return true;
-			}
-			else return false;
-		}catch (Exception e) {
-			return false;
+			kh= (KhachHang)session.createQuery(sql).getSingleResult();
+			return kh;
+		} catch (Exception e) {
+			System.out.println("dang nhap that bai");
+			return kh;
 		}
+			
 	}
 }

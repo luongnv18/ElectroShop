@@ -1,3 +1,7 @@
+<%@page import="electro.entity.SizeSanPham"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
+<%@page import="electro.entity.MauSanPham"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="electro.entity.GioHang"%>
 <%@page import="electro.entity.ChiTietSanPham"%>
@@ -147,7 +151,7 @@
 				<!-- Product details -->
 				<div class="col-md-5">
 					<div class="product-details">
-						<h2 class="product-name sanpham-chitiet" data-masp=${sanPham.getIdSanPham() } data-giasp=${sanPham.getGia() }>${sanPham.getTenSanPham()}</h2>
+						<h2 class="product-name sanpham-chitiet" data-masp=${sanPham.getIdSanPham() } data-giasp=${sanPham.getGia() } data-image=${sanPham.getImage() }>${sanPham.getTenSanPham()}</h2>
 						<div>
 							<div class="product-rating">
 								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -168,16 +172,31 @@
 							sed do eiusmod tempor incididunt ut labore et dolore magna
 							aliqua. Ut enim ad minim veniam, quis nostrud exercitation
 							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-						<div class="product-options">
-							<label> Size <select class="input-select">
-									<option value="0">X</option>
+						
+						
+						<div class="product-options" data-masp=${sanPham.getIdSanPham() }>
+						
+							<label> Màu <select  class="input-select mausanpham">
+							<%
+							Set<MauSanPham> setMauSanPhams=new HashSet();
+							Set<SizeSanPham> setSizeSanPhams=new HashSet();
+							for(ChiTietSanPham ctsp: sanPham.getLstChiTietSanPham()){
+								setSizeSanPhams.add(ctsp.getSizeSanPham());
+								setMauSanPhams.add(ctsp.getMauSanPham());
+								
+							}
+							%>
+							<%for(MauSanPham mauSanPham:setMauSanPhams){%>
+									<option class="" value=<%=mauSanPham.getIdMau() %>><%=mauSanPham.getMau() %></option>
+							<%} %>
 							</select>
-							</label> <label> Color <select class="input-select">
-									<option value="0">Red</option>
+							</label> 
+							<label> Size <select class="input-select"id="sizesanpham">
+							<%for(SizeSanPham sizeSanPham:setSizeSanPhams){%>
+									<option class="sizesanpham" id=<%="size"+sizeSanPham.getIdSize() %> value=<%=sizeSanPham.getIdSize() %>><%=sizeSanPham.getSize() %></option>
+							<%} %>
 							</select>
-							
-							</label>
+							</label>	
 						</div>
 
 						<div class="add-to-cart">
@@ -188,7 +207,7 @@
 										class="qty-down">-</span>
 								</div>
 							</div>
-							<button class="add-to-cart-btn btn-giohang">
+							<button class="add-to-cart-btn btn-giohang-chitiet">
 								<i class="fa fa-shopping-cart"></i> Thêm vào giỏ
 							</button>
 						</div>

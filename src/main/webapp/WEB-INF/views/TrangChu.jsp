@@ -219,15 +219,18 @@
 											</div>
 										</div>
 										<div class="add-to-cart" >
-											<button class="add-to-cart-btn btn-giohang-trangchu" data-masp=<%=sp.getIdSanPham()%> data-giasp=<%=sp.getGia() %>>
-												<span class="the-an"><%=sp.getTenSanPham() %></span>
+											<button class="add-to-cart-btn btn-giohang-trangchu" data-masp=<%=sp.getIdSanPham()%> data-giasp=<%=sp.getGia() %> data-image=<%=sp.GetListImage()[0] %>>
+												<span class="the-an tensanpham" data-idmau=<%=sp.getLstChiTietSanPham().get(0).getMauSanPham().getIdMau() %> data-idsize=<%=sp.getLstChiTietSanPham().get(0).getSizeSanPham().getIdSize() %>
+												data-tenmau=<%=sp.getLstChiTietSanPham().get(0).getMauSanPham().getMau() %>
+												data-idctsp=<%=sp.getLstChiTietSanPham().get(0).getIdChiTietSanPham() %>>
+												<%=sp.getTenSanPham() %></span>
+												<span class="the-an tensize"><%=sp.getLstChiTietSanPham().get(0).getSizeSanPham().getSize() %></span>
+												<span class="the-an tenmau"><%=sp.getLstChiTietSanPham().get(0).getMauSanPham().getMau() %></span>
 												<i class="fa fa-shopping-cart"></i> add to cart
 											</button>
 										</div>
 									</div>
-									<%
-										}
-									%>
+									<%}%>
 								</div>
 								<div id="slick-nav-1" class="products-slick-nav"></div>
 							</div>
@@ -1057,13 +1060,13 @@
 							<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
 							<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
 						</ul>
-						<span class="copyright"> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						<!--  <span class="copyright"> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							Copyright &copy;<script>
 								document.write(new Date().getFullYear());
 							</script> All rights reserved | This template is made with <i
 							class="fa fa-heart-o" aria-hidden="true"></i> by <a
 							href="https://colorlib.com" target="_blank">Colorlib</a> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</span>
+						</span> -->
 					</div>
 				</div>
 				<!-- /row -->

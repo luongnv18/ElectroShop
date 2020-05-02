@@ -1,6 +1,9 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="electro.entity.GioHang"%>
+<%@page import="java.util.List"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -9,7 +12,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - HTML Ecommerce Template</title>
+		<title>Đặt hàng</title>
 
  		<!-- Google font -->
  		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -39,132 +42,13 @@
 
     </head>
 	<body>
-		<!-- HEADER -->
-		<header>
-			<!-- TOP HEADER -->
-			<div id="top-header">
-				<div class="container">
-					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
-					</ul>
-					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- /TOP HEADER -->
-
-			<!-- MAIN HEADER -->
-			<div id="header">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<!-- LOGO -->
-						<div class="col-md-3">
-							<div class="header-logo">
-								<a href="#" class="logo">
-									<img src="<c:url value="/resources/img/logo.png"/>" alt="">
-								</a>
-							</div>
-						</div>
-						<!-- /LOGO -->
-
-						<!-- SEARCH BAR -->
-						<div class="col-md-6">
-							<div class="header-search">
-								<form>
-									<select class="input-select">
-										<option value="0">All Categories</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
-									</select>
-									<input class="input" placeholder="Search here">
-									<button class="search-btn">Search</button>
-								</form>
-							</div>
-						</div>
-						<!-- /SEARCH BAR -->
-
-						<!-- ACCOUNT -->
-						<div class="col-md-3 clearfix">
-							<div class="header-ctn">
-								<!-- Wishlist -->
-								<div>
-									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>Your Wishlist</span>
-										<div class="qty">2</div>
-									</a>
-								</div>
-								<!-- /Wishlist -->
-
-								<!-- Cart -->
-								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-										<i class="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>
-										<div class="qty">3</div>
-									</a>
-									<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="<c:url value="/resources/img/product01.png"/>" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="<c:url value="/resources/img/product02.png"/>" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-										</div>
-										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div>
-										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-										</div>
-									</div>
-								</div>
-								<!-- /Cart -->
-
-								<!-- Menu Toogle -->
-								<div class="menu-toggle">
-									<a href="#">
-										<i class="fa fa-bars"></i>
-										<span>Menu</span>
-									</a>
-								</div>
-								<!-- /Menu Toogle -->
-							</div>
-						</div>
-						<!-- /ACCOUNT -->
-					</div>
-					<!-- row -->
-				</div>
-				<!-- container -->
-			</div>
-			<!-- /MAIN HEADER -->
-		</header>
-		<!-- /HEADER -->
-
+		<%
+		List<GioHang> lstGioHangs=new ArrayList();
+		if(request.getAttribute("giohang")!=null){
+			lstGioHangs=(List<GioHang>)request.getAttribute("giohang");
+		}
+		%>
+		<jsp:include page="header.jsp"></jsp:include>
 		<!-- NAVIGATION -->
 		<nav id="navigation">
 			<!-- container -->
@@ -212,39 +96,26 @@
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
+			
 			<div class="container">
 				<!-- row -->
 				<div class="row">
 
-					<div class="col-md-7">
+					<div class="col-md-6">
+					<span id="ketqua" value=${kqThemHoaDon }></span>
 						<!-- Billing Details -->
 						<div class="billing-details">
 							<div class="section-title">
-								<h3 class="title">Billing address</h3>
+								<h3 class="title">Thông tin nhận hàng</h3>
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="first-name" placeholder="First Name">
+								<input class="input tenNguoiNhan" type="text" name="first-name" placeholder="Họ tên người nhận hàng">
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="last-name" placeholder="Last Name">
+								<input class="input soDTNguoiNhan" type="tel" name="tel" placeholder="Số điện thoại người nhận">
 							</div>
 							<div class="form-group">
-								<input class="input" type="email" name="email" placeholder="Email">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="address" placeholder="Address">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="city" placeholder="City">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="country" placeholder="Country">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-							</div>
-							<div class="form-group">
-								<input class="input" type="tel" name="tel" placeholder="Telephone">
+								<input class="input diaChiGiaoHang" type="text" name="address" placeholder="Địa chỉ giao hàng">
 							</div>
 							<div class="form-group">
 								<div class="input-checkbox">
@@ -255,7 +126,7 @@
 									</label>
 									<div class="caption">
 										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-										<input class="input" type="password" name="password" placeholder="Enter Your Password">
+										<input class="input" type="password" name="password" placeholder="Nhập mật khẩu của bạn">
 									</div>
 								</div>
 							</div>
@@ -305,38 +176,52 @@
 
 						<!-- Order notes -->
 						<div class="order-notes">
-							<textarea class="input" placeholder="Order Notes"></textarea>
+							<textarea class="input ghichu" placeholder="Ghi chú"></textarea>
 						</div>
 						<!-- /Order notes -->
 					</div>
 
 					<!-- Order Details -->
-					<div class="col-md-5 order-details">
+					<div class="col-md-6 order-details">
 						<div class="section-title text-center">
-							<h3 class="title">Your Order</h3>
+							<h3 class="title">Chi tiết đơn hàng</h3>
 						</div>
 						<div class="order-summary">
 							<div class="order-col">
-								<div><strong>PRODUCT</strong></div>
-								<div><strong>TOTAL</strong></div>
-							</div>
-							<div class="order-products">
-								<div class="order-col">
-									<div>1x Product Name Goes Here</div>
-									<div>$980.00</div>
-								</div>
-								<div class="order-col">
-									<div>2x Product Name Goes Here</div>
-									<div>$980.00</div>
-								</div>
+								<table class="table table-striped">
+								  <thead>
+								    <tr>
+								      <th scope="col">Tên sản phẩm</th>
+								      <th scope="col">Màu</th>
+								      <th scope="col">Size</th>
+								      <th scope="col">Số lượng</th>
+								       <th scope="col">Giá tiền</th>
+								        <th scope="col"></th>
+								    </tr>
+								  </thead>
+								  <tbody>
+								  	<%
+										for(GioHang gioHang:lstGioHangs){
+									%>
+								    <tr>
+								      <td class="idsanpham" value=<%=gioHang.getIdSanPham()%>><%=gioHang.getTenSanPham().trim()%></td>
+								      <td class="idmau" value=<%=gioHang.getIdMau() %>><%=gioHang.getTenMau()%></td>
+								      <td class="idsize" value=<%=gioHang.getIdSize()%>><%=gioHang.getTenSize()%></td>
+								      <td><%=gioHang.getSoLuong()%></td>
+								      <td class="sotien giatien"><%=gioHang.getGiasp()*gioHang.getSoLuong()%></td>
+								      <td><button class="btn btn-danger btn-xoa-giohang">Xóa</button></td>
+								    </tr>
+								    <% }%>
+								  </tbody>
+								</table>
 							</div>
 							<div class="order-col">
 								<div>Shiping</div>
 								<div><strong>FREE</strong></div>
 							</div>
 							<div class="order-col">
-								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">$2940.00</strong></div>
+								<div><strong>TỔNG TIỀN</strong></div>
+								<div><strong class="order-total" id="tongtien">$2940.00</strong></div>
 							</div>
 						</div>
 						<div class="payment-method">
@@ -378,7 +263,8 @@
 								I've read and accept the <a href="#">terms & conditions</a>
 							</label>
 						</div>
-						<a href="#" class="primary-btn order-submit">Place order</a>
+
+						<a href="" class="primary-btn order-submit btn-dathang">Đặt hàng</a>
 					</div>
 					<!-- /Order Details -->
 				</div>
@@ -490,33 +376,6 @@
 				<!-- /container -->
 			</div>
 			<!-- /top footer -->
-
-			<!-- bottom footer -->
-			<div id="bottom-footer" class="section">
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<ul class="footer-payments">
-								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-							</ul>
-							<span class="copyright">
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							</span>
-						</div>
-					</div>
-						<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /bottom footer -->
 		</footer>
 		<!-- /FOOTER -->
 
@@ -527,6 +386,37 @@
 		<script src="<c:url value="/resources/js/nouislider.min.js"/>"></script>
 		<script src="<c:url value="/resources/js/jquery.zoom.min.js"/>"></script>
 		<script src="<c:url value="/resources/js/main.js"/>"></script>
-
+		<script src="<c:url value="/resources/js/custom.js"/>"></script>
+		<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded",function () {
+				var ketqua=document.getElementById("ketqua");
+				if(ketqua.getAttribute("value")=="false"){
+					ketqua.setAttribute("style",'color: red;font-weight: bold;')
+					ketqua.innerHTML="Đặt hàng thất bại";
+				}
+				else if(ketqua.getAttribute('value')=="true"){
+					ketqua.setAttribute("style",'color: limegreen;font-weight: bold;');
+					ketqua.innerHTML="Đặt hàng thành công";
+				}
+				//xu ly dat hang
+				var dathang=document.querySelector('.btn-dathang');
+				dathang.onclick=function () {
+					var tenNguoiNhan=document.querySelector(".tenNguoiNhan");
+					var soDTNguoiNhan=document.querySelector(".soDTNguoiNhan");
+					var diaChiGiaoHang=document.querySelector(".diaChiGiaoHang");
+					var ghichu=document.querySelector(".ghichu");
+					var href="thanhtoan/"+tenNguoiNhan.value+"/"+soDTNguoiNhan.value+"/"+diaChiGiaoHang.value+"/"+ghichu.value+"";
+					dathang.setAttribute("href",href);
+				}
+				//tinh tong tien
+				var x=document.getElementsByClassName("sotien");
+				var tongtien=document.getElementById("tongtien");
+				var tong=0;
+				for (var i = 0; i < x.length; i++) {
+					tong+= parseInt(x[i].innerHTML.split('.').join(''));
+				}
+				tongtien.textContent=tong.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+			},false)
+		</script>
 	</body>
 </html>

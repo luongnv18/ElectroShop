@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import electro.entity.DanhMuc;
-import electro.entity.GioHang;
 import electro.entity.SanPham;
 import electro.service.DanhMucSPService;
 import electro.service.SanPhamService;
 
 @Controller
 @RequestMapping("/ChiTiet")
-@SessionAttributes({"email","giohang"})
+@SessionAttributes({"user","giohang"})
 public class ChiTietController {
 	@Autowired
 	SanPhamService sanPhamService;

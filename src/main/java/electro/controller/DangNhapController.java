@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import electro.entity.KhachHang;
 import electro.service.KhachHangService;
 
 @Controller
 @RequestMapping("/DangNhap")
-@SessionAttributes("email")
+@SessionAttributes("user")
 public class DangNhapController {
 	@GetMapping
 	public String Default() {
@@ -24,9 +25,10 @@ public class DangNhapController {
 	
 	@PostMapping
 	public String XuLyDangNhap(@RequestParam String username, @RequestParam String pass, ModelMap modelMap) {
-		if(userService.KiemTraDangNhap(username, pass)) {
+		if(userService.KiemTraDangNhap(username, pass)!=null) {
 			//dang nhap thanh cong
-			modelMap.addAttribute("email", username);
+			KhachHang kh=userService.KiemTraDangNhap(username, pass);
+			modelMap.addAttribute("user", kh);
 			return "redirect:/";
 		}
 		else {

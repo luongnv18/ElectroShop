@@ -16,7 +16,7 @@ import electro.service.SanPhamService;
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes({"email","giohang"})
+@SessionAttributes({"user","giohang"})
 public class TrangChuController {
 
 	@Autowired

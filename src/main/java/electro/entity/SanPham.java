@@ -1,5 +1,6 @@
 package electro.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -44,13 +45,13 @@ public class SanPham {
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="IdSanPham")
-	Set<ChiTietSanPham> lstChiTietSanPham;
+	List<ChiTietSanPham> lstChiTietSanPham;
 
-	public Set<ChiTietSanPham> getLstChiTietSanPham() {
+	public List<ChiTietSanPham> getLstChiTietSanPham() {
 		return lstChiTietSanPham;
 	}
 
-	public void setLstChiTietSanPham(Set<ChiTietSanPham> lstChiTietSanPham) {
+	public void setLstChiTietSanPham(List<ChiTietSanPham> lstChiTietSanPham) {
 		this.lstChiTietSanPham = lstChiTietSanPham;
 	}
 

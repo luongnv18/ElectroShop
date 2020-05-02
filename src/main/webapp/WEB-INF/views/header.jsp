@@ -1,3 +1,4 @@
+<%@page import="electro.entity.KhachHang"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="electro.entity.GioHang"%>
 <%@page import="electro.entity.DanhMuc"%>
@@ -14,7 +15,6 @@
 		}
 
 	%>
-	<%=lstGioHangs.size() %>
 	<!-- HEADER -->
 	<header>
 		<!-- TOP HEADER -->
@@ -30,11 +30,13 @@
 				<ul class="header-links pull-right">
 					<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
 					<%
-						String email = "Đăng Nhập";
-						if (request.getAttribute("email") != null)
-							email = "Xin chào " + request.getAttribute("email").toString();
+						String user = "Đăng Nhập";
+						if (request.getAttribute("user") != null){
+							KhachHang kh=(KhachHang)request.getAttribute("user");
+							user = "Xin chào " + kh.getTenDangNhap();
+						}
 					%>
-					<li><a href="DangNhap"><i class="fa fa-user-o"></i><%=email%></a></li>
+					<li><a href="DangNhap"><i class="fa fa-user-o"></i><%=user%></a></li>
 				</ul>
 			</div>
 		</div>
@@ -100,7 +102,7 @@
 									%>
 										<div class="product-widget">
 											<div class="product-img">
-												<img src="<c:url value="/resources/img/product01.png"/>"
+												<img src="<c:url value="<%=gioHang.GetListImage()[0] %>"/>"
 													alt="">
 											</div>
 											<div class="product-body">
@@ -127,7 +129,7 @@
 										<h5>Tổng tiền: <%=tongtien %>VND</h5>
 									</div>
 									<div class="cart-btns">
-										<a href="#">View Cart</a> <a href="#">Checkout <i
+										<a href="#">View Cart</a> <a href="/ElectroShop/thanhtoan">Thanh toán <i
 											class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
