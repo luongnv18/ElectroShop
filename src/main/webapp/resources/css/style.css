@@ -115,7 +115,7 @@ ul, ol {
 .input {
 	height: 40px;
 	padding: 0px 15px;
-	border: 1px solid #E4E7ED;
+	border: 1px solid #FF0000;
 	background-color: #FFF;
 	width: 100%;
 }
@@ -179,9 +179,9 @@ textarea.input {
 
 /*-- Select input --*/
 .input-select {
-	padding: 0px 15px;
+	padding: 0px 5px;
 	background: #FFF;
-	border: 1px solid #E4E7ED;
+	border: 1px solid #FF0000;
 	height: 40px;
 }
 

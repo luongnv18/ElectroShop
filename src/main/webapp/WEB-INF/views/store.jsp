@@ -106,14 +106,14 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				
-				<!-- ASIDE -->
+
 				<form method="get">
-				<div id="aside" class="col-md-3">
-					<!-- aside Widget -->
-					<div class="aside">
-						<h3 class="aside-title">Loại sản phẩm</h3>
-						
+					<!-- ASIDE -->
+					<div id="aside" class="col-md-3">
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Loại sản phẩm</h3>
+
 							<div class="checkbox-filter">
 								<%
 									int i = 0;
@@ -135,31 +135,31 @@
 								%>
 								<button class="search-btn-2" type="submit">Tìm kiếm</button>
 							</div>
-						</form>
-					</div>
-					<!-- /aside Widget -->
 
-					<!-- aside Widget -->
-					<div class="aside">
-						<h3 class="aside-title">Giá</h3>
-						<div class="price-filter">
-							<div id="price-slider"></div>
-							<div class="input-number">
-								<input type="number" placeholder="Từ" name="price-from"> <span
-									class="qty-up">+</span> <span class="qty-down">-</span>
-							</div>
-							<span>-</span>
-							<div class="input-number">
-								<input type="number" placeholder="Đến" name="price-to"> <span
-									class="qty-up">+</span> <span class="qty-down">-</span>
+						</div>
+						<!-- /aside Widget -->
+
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Giá</h3>
+							<div class="price-filter">
+								<div id="price-slider"></div>
+								<div class="input-number">
+									<input type="number" placeholder="Từ" name="price-from">
+									<span class="qty-up">+</span> <span class="qty-down">-</span>
+								</div>
+								<span>-</span>
+								<div class="input-number">
+									<input type="number" placeholder="Đến" name="price-to">
+									<span class="qty-up">+</span> <span class="qty-down">-</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					<!-- /aside Widget -->
+						<!-- /aside Widget -->
 
-					<!-- aside Widget -->
-					<div class="aside">
-						<h3 class="aside-title">Thương hiệu</h3>
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Thương hiệu</h3>
 							<%
 								int j = 0;
 								for (ThuongHieu thuonghieu : lstThuongHieu) {
@@ -179,60 +179,65 @@
 								}
 							%>
 							<button class="search-btn-2" type="submit">Tìm kiếm</button>
-					</div>
-					<!-- /aside Widget -->
-
-					<!-- aside Widget -->
-					<div class="aside">
-						<h3 class="aside-title">Sản phẩm bán chạy</h3>
-						<%
-							for (SanPham sp : lstSanPham) {
-						%>
-						<div class="product-widget">
-							<a href="ChiTiet/<%=sp.getIdSanPham()%>">
-								<div class="product-img">
-									<img src="<c:url value="<%=sp.GetListImage()[0]%>"/>" alt="">
-								</div>
-							</a>
-							<div class="product-body">
-								<p class="product-category"><%=sp.getThuongHieu().getTenThuongHieu()%></p>
-								<h3 class="product-name">
-									<a href="ChiTiet/<%=sp.getIdSanPham()%>"><%=sp.getTenSanPham()%></a>
-								</h3>
-								<h4 class="product-price">
-									<%=sp.getGia()%>
-									<del class="product-old-price"><%=sp.getGia()%></del>
-								</h4>
-							</div>
 						</div>
-						<%
-							}
-						%>
+						<!-- /aside Widget -->
+
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Sản phẩm bán chạy</h3>
+							<%
+								for (SanPham sp : lstSanPham) {
+							%>
+							<div class="product-widget">
+								<a href="ChiTiet/<%=sp.getIdSanPham()%>">
+									<div class="product-img">
+										<img src="<c:url value="<%=sp.GetListImage()[0]%>"/>" alt="">
+									</div>
+								</a>
+								<div class="product-body">
+									<p class="product-category"><%=sp.getThuongHieu().getTenThuongHieu()%></p>
+									<h3 class="product-name">
+										<a href="ChiTiet/<%=sp.getIdSanPham()%>"><%=sp.getTenSanPham()%></a>
+									</h3>
+									<h4 class="product-price">
+										<%=sp.getGia()%>
+										<del class="product-old-price"><%=sp.getGia()%></del>
+									</h4>
+								</div>
+							</div>
+							<%
+								}
+							%>
+						</div>
+						<!-- /aside Widget -->
 					</div>
-					<!-- /aside Widget -->
-				</div>
+
+					<!-- /ASIDE -->
 				</form>
-				<!-- /ASIDE -->
-				
+
 				<!-- STORE -->
 				<div id="store" class="col-md-9">
 					<!-- store top filter -->
 					<div class="store-filter clearfix">
 						<div class="store-sort">
-							<label> Sort By: <select class="input-select">
-									<option value="0">Popular</option>
-									<option value="1">Position</option>
-							</select>
-							</label> <label> Show: <select class="input-select">
-									<option value="0">20</option>
-									<option value="1">50</option>
-							</select>
-							</label>
+							<form method="get">
+								<label> Sắp xếp: <select class="input-select" id="sort"
+									name="sort">
+										<option value="0">--- Chọn ---</option>
+										<option value="1">Mới nhất</option>
+										<option value="2">Bán chạy nhất</option>
+										<option value="3">Giá từ thấp đến cao</option>
+										<option value="4">Giá từ cao đến thấp</option>
+								</select>
+								</label> <label> Hiển thị: <select class="input-select" id="show"
+									name="show">
+										<option value="6">6 sản phẩm</option>
+										<option value="12">12 sản phẩm</option>
+										<option value="30">30 sản phẩm</option>
+								</select>
+								</label>
+							</form>
 						</div>
-						<ul class="store-grid">
-							<li class="active"><i class="fa fa-th"></i></li>
-							<li><a href="#"><i class="fa fa-th-list"></i></a></li>
-						</ul>
 					</div>
 					<!-- /store top filter -->
 
@@ -244,7 +249,7 @@
 						%>
 						<!-- product -->
 						<div class="col-md-4 col-xs-6">
-							<div class="product">
+							<div class="product contentPage">
 								<a href="ChiTiet/<%=sp.getIdSanPham()%>">
 									<div class="product-img">
 										<img src="<c:url value="<%=sp.GetListImage()[0]%>"/>" alt="">
@@ -303,13 +308,7 @@
 					<!-- store bottom filter -->
 					<div class="store-filter clearfix">
 						<span class="store-qty">Showing 20-100 products</span>
-						<ul class="store-pagination">
-							<li class="active">1</li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-						</ul>
+						<ul id="pagination"></ul>
 					</div>
 					<!-- /store bottom filter -->
 				</div>
@@ -455,12 +454,67 @@
 
 	<!-- jQuery Plugins -->
 	<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/jquery.session.js"/>"></script>
 	<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/slick.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/nouislider.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/jquery.zoom.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/main.js"/>"></script>
 	<script src="<c:url value="/resources/js/custom.js"/>"></script>
+	<script src="<c:url value="/resources/js/jquery.twbsPagination.js"/>"></script>
 
+	<script>
+		$(document).ready(function() {
+			$('#show').change(function() {
+				$.session.set('#show', $('#show').val());
+				$(this).parents("form").submit();
+			})
+		});
+
+		$(document).ready(function() {
+			$('#sort').change(function() {
+				$.session.set('#sort', $('#sort').val());
+				$(this).parents("form").submit();
+			})
+		});
+
+		$(function() {
+			if ($.session.get('#sort') != null)
+				$('#sort').val($.session.get('#sort'));
+		});
+		
+		$(function() {
+			if ($.session.get('#show') != null){
+				$('#show').val($.session.get('#show'));
+			} else {
+				$.session.set('#show', '6');
+			}
+		});
+
+		$(function() {
+			var pageSize = $.session.get('#show'); // Hiển thị 6 sản phẩm trên 1 trang
+			showPage = function(page) {
+				$(".contentPage").hide();
+				$(".contentPage").each(function(n) {
+					if (n >= pageSize * (page - 1) && n < pageSize * page)
+						$(this).show();
+				});
+			}
+			showPage(1);
+			var totalRows = 40; // Tổng số sản phẩm hiển thị
+			var btnPage = 5; // Số nút bấm hiển thị di chuyển trang
+			var iTotalPages = Math.ceil(totalRows / pageSize);
+
+			var obj = $('#pagination').twbsPagination({
+				totalPages : iTotalPages,
+				visiblePages : btnPage,
+				onPageClick : function(event, page) {
+					console.info(page);
+					showPage(page);
+				}
+			});
+			console.info(obj.data());
+		});
+	</script>
 </body>
 </html>

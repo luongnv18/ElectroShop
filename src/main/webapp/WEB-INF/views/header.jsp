@@ -61,17 +61,17 @@
 					<!-- SEARCH BAR -->
 					<div class="col-md-6">
 						<div class="header-search">
-							<form>
-								<select class="input-select">
+							<form method="get">
+								<select name="headerCategory" class="input-select">
 									<option value="0">Tất cả sản phẩm</option>
 									<%
 										for (DanhMuc dm : lstDanhMucs) {
 									%>
-									<option value="1"><%=dm.getTenDanhMuc()%></option>
+									<option value="<%=dm.getIdDanhMuc()%>"><%=dm.getTenDanhMuc()%></option>
 									<%
 										}
 									%>
-								</select> <input class="input" placeholder="Từ khóa">
+								</select> <input class="input" placeholder="Từ khóa" name="headerName">
 								<button class="search-btn" type="submit">Tìm kiếm</button>
 							</form>
 						</div>
