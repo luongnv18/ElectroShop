@@ -17,7 +17,7 @@ public class HoaDonDAO {
 	public int ThemHoaDon(HoaDon hoaDon) {
 		Session session = sessionFactory.getCurrentSession();
 		int id= (Integer)session.save(hoaDon);
-		session.persist(hoaDon);
+//		session.persist(hoaDon);
 		if(0 < id){
 			return id;
 		}else{

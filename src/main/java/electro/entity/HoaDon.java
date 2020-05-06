@@ -30,9 +30,9 @@ public class HoaDon {
 	Boolean TinhTrang;
 	LocalDateTime NgayMua;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "chiTietHoaDonId.hoaDon",cascade = CascadeType.ALL)
 //	@JoinColumns({@JoinColumn(name="IdHoaDon", referencedColumnName = "IdHoaDon"),@JoinColumn(name="")})
-	@JoinColumn(name = "IdHoaDon")
+//	@JoinColumn(name = "IdHoaDon")
 	Set<ChiTietHoaDon> lstChiTietHoaDon;
 
 	public int getIdHoaDon() {

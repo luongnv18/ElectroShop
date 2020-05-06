@@ -1,7 +1,10 @@
 package electro.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import electro.entity.ChiTietHoaDon;
+import electro.entity.ChiTietSanPham;
 import electro.entity.DanhMuc;
 import electro.entity.GioHang;
 import electro.entity.HoaDon;
@@ -56,33 +60,32 @@ public class ThanhToanController {
 			hoaDon.setGhiChu(ghiChu);
 			hoaDon.setDiaChiGiaoHang(diaChiGiaoHang);
 			hoaDon.setNgayMua(LocalDateTime.now());
-			
-			int idHoaDon=hoaDonService.ThemHoaDon(hoaDon);
-			if(idHoaDon>0) {//them hoa don thanh cong
-				//them chitiethoadon
-				for(GioHang gioHang:gioHangs) {
-					ChiTietHoaDon chiTietHoaDon=new ChiTietHoaDon();
-					ChiTietHoaDon.ChiTietHoaDonId chiTietHoaDonId=new ChiTietHoaDon.ChiTietHoaDonId();
-					chiTietHoaDonId.setIdChiTietSanPham(gioHang.getIdChiTietSp());
-					chiTietHoaDonId.setIdHoaDon(idHoaDon);
-					chiTietHoaDon.setChiTietHoaDonId(chiTietHoaDonId);
-					chiTietHoaDon.setSoLuong(gioHang.getSoLuong());
-					chiTietHoaDon.setGiaTien(gioHang.getGiasp());
-					if(chiTietHoaDonService.ThemChiTietHoaDon(chiTietHoaDon)) {
-						System.out.println("them thanh cong");
-						ketqua=true;
-					} else {
-						System.out.println("them that bai");
-						ketqua=false;
-					}
-				}
+			//list chitiethoadon
+			Set<ChiTietHoaDon> lstChiTietHoaDons=new HashSet<ChiTietHoaDon>();
+			for(GioHang gioHang:gioHangs) {
+				ChiTietHoaDon chiTietHoaDon=new ChiTietHoaDon();
+				ChiTietHoaDon.ChiTietHoaDonId chiTietHoaDonId=new ChiTietHoaDon.ChiTietHoaDonId();
+				chiTietHoaDonId.setHoaDon(hoaDon);
+				ChiTietSanPham chiTietSanPham=new ChiTietSanPham();
+				chiTietSanPham.setIdChiTietSanPham(gioHang.getIdChiTietSp());
+				chiTietHoaDonId.setChiTietSanPham(chiTietSanPham);
+				chiTietHoaDon.setChiTietHoaDonId(chiTietHoaDonId);
+				chiTietHoaDon.setSoLuong(gioHang.getSoLuong());
+				chiTietHoaDon.setGiaTien(gioHang.getGiasp());
+				lstChiTietHoaDons.add(chiTietHoaDon);
 			}
-		gioHangs.removeAll(gioHangs);
-		}else{
-			System.out.println("them that bai");
-			ketqua=false;
+			hoaDon.setLstChiTietHoaDon(lstChiTietHoaDons);
+			int idHoaDon=hoaDonService.ThemHoaDon(hoaDon);
+			System.out.println("hoa don duoc luu co id la: "+idHoaDon);
+			if(idHoaDon>0) {//them thanh cong
+				System.out.println("them hoa don thanh cong");
+				ketqua=true;
+				gioHangs.removeAll(gioHangs);
+			}else {//them hoa don that bai
+				System.out.println("them hoa don that bai");
+				ketqua=false;
+			}
 		}
-		
 		modelMap.addAttribute("kqThemHoaDon",ketqua);
 		return "checkout";
 	}

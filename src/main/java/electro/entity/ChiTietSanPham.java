@@ -1,13 +1,16 @@
 package electro.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity(name="ChiTietSanPham")
@@ -16,18 +19,27 @@ public class ChiTietSanPham {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int IdChiTietSanPham;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="IdSanPham")
 	SanPham sanPham;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="IdMau")
 	MauSanPham mauSanPham;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="IdSize")
 	SizeSanPham sizeSanPham;
 	
+	@OneToMany(mappedBy = "chiTietHoaDonId.chiTietSanPham", cascade = CascadeType.ALL)
+	List<ChiTietHoaDon> lstChiTietHoaDons;
+	
+	public List<ChiTietHoaDon> getLstChiTietHoaDons() {
+		return lstChiTietHoaDons;
+	}
+	public void setLstChiTietHoaDons(List<ChiTietHoaDon> lstChiTietHoaDons) {
+		this.lstChiTietHoaDons = lstChiTietHoaDons;
+	}
 	int SoLuong;
 	LocalDateTime NgayNhap;
 
