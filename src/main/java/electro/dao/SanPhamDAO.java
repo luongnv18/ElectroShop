@@ -24,6 +24,25 @@ public class SanPhamDAO {
 		List<SanPham> lstSanPhams = session.createQuery(sql).getResultList();
 		return lstSanPhams;
 	}
+	@Transactional
+	public List<SanPham> GetListSanPhamLimit(int vitribatdau) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "from SanPham";
+		
+		Query query = session.createQuery("from SanPham");
+		query.setFirstResult(vitribatdau);
+		query.setMaxResults(5);
+		List<SanPham> lstSanPhams = query.getResultList();
+		
+		return lstSanPhams;
+	}
+	@Transactional
+	public Long GetTotalCount() {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "select count(IdSanPham) from SanPham";
+		Long totalcount = (Long)session.createQuery(sql).uniqueResult();
+		return totalcount;
+	}
 
 	@Transactional
 	public SanPham GetSanPhamById(int Id) {
@@ -136,5 +155,43 @@ public class SanPhamDAO {
 		resultList = query.getResultList();
 		return resultList;
 	}
-	
+	@Transactional
+	public int ThemSanPham(SanPham sp) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			int id=(Integer)session.save(sp);
+			return id;
+		}catch (Exception e) {
+			return -1;
+		}
+	}
+	@Transactional
+	public String getImageSanPham(int idsp) {
+		Session session = sessionFactory.getCurrentSession();
+			return session.createQuery("select Image from SanPham where IdSanPham="+idsp).list().get(0).toString();
+	}
+	@Transactional
+	public boolean SuaSanPham(SanPham sp) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			if(sp.getImage()==null) {
+				sp.setImage(getImageSanPham(sp.getIdSanPham()));
+			}
+			session.update(sp);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	@Transactional
+	public boolean XoaSanPham(int idSP) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			SanPham sp=session.get(SanPham.class, idSP);
+			session.delete(sp);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

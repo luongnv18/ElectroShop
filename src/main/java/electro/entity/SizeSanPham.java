@@ -11,8 +11,16 @@ public class SizeSanPham {
 	@GeneratedValue(strategy =GenerationType.IDENTITY )
 	int IdSize;
 	String Size;
-	
 
+	public SizeSanPham() {
+	}
+	public SizeSanPham(int idSize) {
+		IdSize = idSize;
+	}
+	public SizeSanPham(int idSize, String size) {
+		IdSize = idSize;
+		Size = size;
+	}
 	public int getIdSize() {
 		return IdSize;
 	}

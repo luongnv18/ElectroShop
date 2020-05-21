@@ -1,7 +1,6 @@
 package electro.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +14,12 @@ public class SanPhamService {
 	
 	public List<SanPham> GetListSanPham(){
 		return sanphamDAO.GetListSanPham();
+	}
+	public List<SanPham> GetListSanPhamLimit(int vitribatdau){
+		return sanphamDAO.GetListSanPhamLimit(vitribatdau);
+	}
+	public Long GetTotalCount() {
+		return sanphamDAO.GetTotalCount();
 	}
 	public SanPham GetSanPhamById(int Id) {
 		SanPham sanPham=sanphamDAO.GetSanPhamById(Id);
@@ -52,6 +57,16 @@ public class SanPhamService {
 	}
 	public List<SanPham> SapXepSanPhamTheoGiaTuCaoDenThap(){
 		return sanphamDAO.SapXepSanPhamTheoGiaTuCaoDenThap();
+	}
+	
+	public int ThemSanPham(SanPham sp) {
+		return sanphamDAO.ThemSanPham(sp);
+	}
+	public boolean SuaSanPham(SanPham sp) {
+		return sanphamDAO.SuaSanPham(sp);
+	}
+	public boolean XoaSanPham(int idSP) {
+		return sanphamDAO.XoaSanPham(idSP);
 	}
 
 }

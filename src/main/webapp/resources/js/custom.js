@@ -1,6 +1,9 @@
 $(document).ready(function(){
 //	$(".product-options").hide();
-	$(".the-an").hide();
+//	 $(".the-an").hide();
+	const elmtclone=$('.divclone').clone();
+	elmtclone.removeAttr('class');
+	$('#pagination-dashboardsanpham li:nth-child(2)').addClass('active');
 	dinhdangtien();
 	$(".btn-giohang-chitiet").click(function(){
 		var value = $(".mausanpham option:selected"); 
@@ -135,6 +138,211 @@ $(document).ready(function(){
 		    }
 		})    
 	})
+
+	//dashboard
+	$('#btnThemSanPham').click(function(event) {
+		//reset lai chitietsanpham
+		$('#chitietsanphamform').children().remove();
+		$('#chitietsanphamform').append(elmtclone);
+		//thay doi text button
+		$('#themsanphamformTitle').text('Thêm sản phẩm mới');
+		$('#btnSubmitThemSanPhamForm').text('Thêm sản phẩm');
+	});
+	
+	$('body').on('click', '.btnSuaSanPham', function(event) {
+		//reset lai chitietsanpham
+		$('#chitietsanphamform').children().remove();
+		$('#chitietsanphamform').append(elmtclone);
+
+		$('#themsanphamformTitle').text('Sửa thông tin sản phẩm');
+		$('#btnSubmitThemSanPhamForm').text('Sửa sản phẩm');
+		//lay thong tin san pham do vao form
+		var masp=$(this).closest("tr").find('td').first().text();
+		var tensp=$(this).closest("tr").find('td:nth-child(3)').text();
+		var giasp=parseInt($(this).closest("tr").find('td:nth-child(4)').text());
+		var baohanh=$(this).closest("tr").find('td:nth-child(5)').text();
+		var tinhtrang=$(this).closest("tr").find('td:nth-child(6)').text();
+		var motasp=$(this).closest("tr").find('.the-an').text();
+		var madm=$(this).closest("tr").find('.the-an').attr('data-madm');
+		var math=$(this).closest("tr").find('.the-an').attr('data-math');
+		$('#masanpham').val(masp);
+		$('#tensanpham').val(tensp);
+		$('#giasp').val(giasp);
+		$('#baohanhsp').val(baohanh);
+		$('#tinhtrangsp').val(tinhtrang);
+		$('#motasp').val(motasp);
+		$('#danhmucsp').val(madm);
+		$('#thuonghieusp').val(math);
+		//lay thong tin cac chi tiet san pham
+		// var chitietsp={};
+		$(this).closest('tr').find('.the-an.chitietsanpham').each(function(index, el) {
+			//clone sau do gan gia tri cho clone
+			if (index==0) {
+				$('select[name="mausp"]').val($(this).attr('data-mamau'));
+				$('select[name="sizesp"]').val($(this).attr('data-masize'));
+				$('input[name="soluongsp"]').val($(this).attr('data-soluong'));
+				$('input[name="mactsp"]').val($(this).attr('data-mactsp'));
+			}else{
+				var elmtclone1=$('div.divclone').clone();
+				elmtclone1.removeAttr('class');
+				elmtclone1.find('select[name="mausp"]').val($(this).attr('data-mamau'));
+				elmtclone1.find('select[name="sizesp"]').val($(this).attr('data-masize'));
+				elmtclone1.find('input[name="soluongsp"]').val($(this).attr('data-soluong'));
+				elmtclone1.find('input[name="mactsp"]').val($(this).attr('data-mactsp'));
+				$('#chitietsanphamform').append(elmtclone1);
+			}
+		});
+	});	
+
+	$('body').on('click', '.btnXoaSanPham', function(event) {
+		console.log('xoa san pham');
+		var masp=$(this).closest('.thongtinsanpham').find('td').first().text();
+		console.log(masp);
+		$(this).closest(".thongtinsanpham").remove();
+		$.ajax({
+			type: "DELETE",
+			url: "/ElectroShop/api/XoaSanPham/"+masp,
+			success: function (response) {
+				console.log(response);
+			}
+		});
+	});
+
+	$('#btnThemChiTietSanPham').click(function(event) {
+		clonephantu('#chitietsanphamform');
+	});
+
+	$('#btnSubmitThemSanPhamForm').click(function(event) {
+		event.preventDefault();
+		if ($(this).text()=='Thêm sản phẩm') {
+			url='/ElectroShop/api/ThemSanPham';
+			var type='POST';
+		} else {
+			url='/ElectroShop/api/CapNhatSanPham';
+			var type='POST';
+		}
+		var fields=$('#formThemSanPham').serializeArray();
+		json={};
+		chitietsp=[];
+		tempObj={};
+		$.each(fields, function(i, field){
+			if (field.name=='mausp'||field.name=='sizesp'||field.name=='soluongsp'||field.name=='mactsp') {
+				tempObj[field.name]=field.value;
+				if (field.name=='mactsp') {
+					chitietsp.push(tempObj);
+					tempObj={};
+				}
+			}
+			else json[field.name]=field.value;
+		});
+		json["hinhsp"]=hinhsp;
+	    json["chitietsanpham"]=chitietsp;
+	   $.ajax({
+			url:url,
+			type:type,
+		    data:{
+		    	dataJson: JSON.stringify(json)
+		    },
+			success: function(value){
+				if(url=='/ElectroShop/api/ThemSanPham'){
+					$('#ketqua').text('Thêm sản phẩm thành công');
+					$('#ketqua').attr('style','color: limegreen;font-weight: bold;');
+				}else{
+					$('#ketqua').text('Cập nhật sản phẩm thành công');
+					$('#ketqua').attr('style','color: limegreen;font-weight: bold;');
+				}
+			},
+		    error: function (error) {
+		    	if(url=='/ElectroShop/api/ThemSanPham'){
+		    		$('#ketqua').text('Thêm sản phẩm thất bại');
+					$('#ketqua').attr('style','color: red;font-weight: bold;');
+				}else{
+					$('#ketqua').text('Cập nhật sản phẩm thất bại');
+					$('#ketqua').attr('style','color: red;font-weight: bold;');
+				}
+				
+		        alert('error; ' + eval(error));
+		    }
+		})
+
+	});
+
+	$('#pagination-dashboardsanpham li').click(function (event) { 
+		event.preventDefault();
+		$('#pagination-dashboardsanpham li').removeClass('active');
+		$(this).addClass('active');
+		var vitribatdau=$(this).text();
+		vitribatdau=(vitribatdau-1)*5;
+		$.ajax({
+			url:"/ElectroShop/api/LaySanPhamLimit",
+			type: "GET",
+		    data:{
+		    	vitribatdau:vitribatdau
+		    },
+			success: function(value){
+				var clone=$(".thongtinsanpham:nth-child(1)").clone();
+				$("#tableSanPham tbody").children().remove();
+				for (var index = 0; index < value.length; index++) {
+					clone.find('td:nth-child(1)').text(value[index].idSanPham);
+					clone.find('td:nth-child(2) div img').attr('src',"/ElectroShop"+value[index].image.split(";")[0]);
+					clone.find('td:nth-child(3)').text(value[index].tenSanPham);
+					clone.find('td:nth-child(4)').text(value[index].gia);
+					clone.find('td:nth-child(5)').text(value[index].baoHanh);
+					clone.find('td:nth-child(6)').text(value[index].tinhTrang);
+					clone.find('td:nth-child(7)').attr('data-madm',value[index].danhMuc.idDanhMuc);
+					clone.find('td:nth-child(7)').attr('data-math',value[index].thuongHieu.idThuongHieu);
+					clone.find('td:nth-child(7)').text(value[index].moTa);
+					var clonectsp=clone.find('td:nth-child(8)');
+					clone.find('.chitietsanpham').remove();
+					var lstChiTietSanPham=value[index].lstChiTietSanPham;
+					for (var i = 0; i < lstChiTietSanPham.length; i++) {
+						clonectsp.attr('data-mactsp',lstChiTietSanPham[i].idChiTietSanPham);
+						clonectsp.attr('data-mamau',lstChiTietSanPham[i].mauSanPham.idMau);
+						clonectsp.attr('data-masize',lstChiTietSanPham[i].sizeSanPham.idSize);
+						clonectsp.attr('data-soluong',lstChiTietSanPham[i].soLuong);
+						clone.find('td:nth-child(7)').after(clonectsp[0].outerHTML);
+					}
+					
+					$("#tableSanPham tbody").append(clone[0].outerHTML);
+				}
+			}
+		})
+	});
+	//upload file
+	var hinhsp="";
+	$('#hinhsp').change(function(event) {
+		files=event.target.files;
+		namefiles='Hình ảnh: ';
+		var form =new FormData();
+		for(x of files){
+			hinhsp=hinhsp+"/resources/img/"+x.name+";";
+			namefiles+=x.name+' ';
+			form.append("file",x);
+			uploadNext(form);
+			console.log(form.get("file"));
+			form.delete("file");
+			console.log(x.name);
+		}
+		$('label[for="hinhsp"]').text(namefiles);
+	})
+	function uploadNext(form) {
+		$.ajax({
+			url:"/ElectroShop/api/UploadFile",
+		    type:"POST",
+		    data:form,
+		    contentType:false,
+		    processData:false,
+		    enctype: "multipart/form-data",
+			success: function(value){
+				
+			}
+		})
+	}
+
+	$('body').on('click', '.btnXoaChiTietSanPham', function(event) {
+		event.preventDefault();
+		$(this).closest('div[ten="ctsp"]').remove();
+	});
 	
 	$(".cart-dropdown").click(function(){	
 		
@@ -155,5 +363,10 @@ $(document).ready(function(){
 			x[i].textContent=giatien.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
 		}
 	}
-	
+	function clonephantu(idphantu) {
+		var elmtclone1=elmtclone;
+//		 var elmtclone1=$('div.divclone').clone();
+		 elmtclone1.removeAttr('class');
+		$(idphantu).append(elmtclone1[0].outerHTML);
+	}
 })

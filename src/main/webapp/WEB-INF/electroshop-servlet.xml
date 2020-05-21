@@ -19,7 +19,7 @@
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
 	<mvc:annotation-driven/>
 	
-	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<import resource="classpath:IoC.xml"/>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

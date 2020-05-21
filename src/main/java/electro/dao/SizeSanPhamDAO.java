@@ -9,17 +9,16 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import electro.entity.ChiTietSanPham;
+import electro.entity.SizeSanPham;
 
 @Repository
-public class ChiTietSanPhamDAO {
+public class SizeSanPhamDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 	@Transactional
-	public List<ChiTietSanPham> LaySizeTheoMau(int masp, int mamau) {
+	public List<SizeSanPham> getAllSizeSP() {
 		Session session=sessionFactory.getCurrentSession();
-		List<ChiTietSanPham> lstctsp= session.createQuery("from ChiTietSanPham where IdSanPham="+masp+" AND IdMau="+mamau).getResultList();
-		System.out.println(lstctsp);
-		return lstctsp;
+		List<SizeSanPham> sizeSanPhams= session.createQuery("from SizeSanPham").getResultList();
+		return sizeSanPhams;
 	}
 }

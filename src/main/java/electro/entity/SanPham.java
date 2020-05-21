@@ -15,7 +15,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import net.bytebuddy.asm.Advice.This;
 
 @Entity(name="SanPham")
 public class SanPham {
@@ -29,15 +28,15 @@ public class SanPham {
 	String MoTa;
 	String Image;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="IdThuongHieu")
 	ThuongHieu thuongHieu;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="IdDanhMuc")
 	DanhMuc danhMuc;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name="ChiTietKhuyenMai",
 		joinColumns = {@JoinColumn(name="IdSanPham",referencedColumnName = "IdSanPham")},
 		inverseJoinColumns = {@JoinColumn(name="IdKhuyenMai",referencedColumnName = "IdKhuyenMai")})

@@ -11,7 +11,18 @@ public class MauSanPham {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int IdMau;
 	String Mau;
-
+	
+	public MauSanPham() {
+		
+	}
+	public MauSanPham(int idMau) {
+		IdMau = idMau;
+	}
+	public MauSanPham(int idMau, String mau) {
+		IdMau = idMau;
+		Mau = mau;
+	}
+	
 	public int getIdMau() {
 		return IdMau;
 	}
