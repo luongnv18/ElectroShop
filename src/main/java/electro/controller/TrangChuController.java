@@ -28,8 +28,10 @@ public class TrangChuController {
 	public String Default(ModelMap modelMap) {
 		List<DanhMuc> lstDanhMucs = danhMucSPService.GetListDanhMuc();
 		List<SanPham> lstSanPhams = sanPhamService.GetListSanPham();
+		List<SanPham> lstSPBanChay = sanPhamService.getSanPhamBanChay();
 		modelMap.addAttribute("lstDanhMuc", lstDanhMucs);
 		modelMap.addAttribute("lstSanPham", lstSanPhams);
+		modelMap.addAttribute("lstSPBanChay", lstSPBanChay);
 		return "TrangChu";
 	}
 

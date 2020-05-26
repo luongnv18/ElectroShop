@@ -68,5 +68,9 @@ public class SanPhamService {
 	public boolean XoaSanPham(int idSP) {
 		return sanphamDAO.XoaSanPham(idSP);
 	}
+	
+	public List<SanPham> getSanPhamBanChay(){
+		return sanphamDAO.getSanPhamBanChay();
+	}
 
 }

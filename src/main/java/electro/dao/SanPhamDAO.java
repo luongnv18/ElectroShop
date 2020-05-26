@@ -194,4 +194,18 @@ public class SanPhamDAO {
 			return false;
 		}
 	}
+	
+	@Transactional
+	public List<SanPham> getSanPhamBanChay(){
+		Session session = sessionFactory.getCurrentSession();
+		List<SanPham> resultList;
+		String sql = "SELECT sp FROM SanPham sp "
+				+ "INNER JOIN ChiTietSanPham ctsp ON ctsp.sanPham.IdSanPham = sp.IdSanPham "
+				+ "INNER JOIN ChiTietHoaDon cthd ON cthd.chiTietHoaDonId.chiTietSanPham.IdChiTietSanPham = ctsp.IdChiTietSanPham "
+				+ "GROUP BY sp.IdSanPham, sp.TenSanPham, sp.Gia, sp.TinhTrang, sp.BaoHanh, sp.MoTa, sp.Image, sp.thuongHieu.IdThuongHieu, sp.danhMuc.IdDanhMuc "
+				+ "ORDER BY SUM(cthd.SoLuong) desc";	
+		Query query = session.createQuery(sql);
+		resultList = query.getResultList();
+		return resultList;
+	}
 }
