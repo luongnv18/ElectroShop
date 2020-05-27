@@ -59,6 +59,7 @@
 		List<Long> lstSoLuongTheoDM = (List<Long>) request.getAttribute("lstSoLuongTheoDM");
 		List<Long> lstSoLuongTheoTH = (List<Long>) request.getAttribute("lstSoLuongTheoTH");
 		List<SanPham> lstSPTimKiem = (List<SanPham>) request.getAttribute("lstSPTimKiem");
+		List<SanPham> lstSPBanChay = (List<SanPham>) request.getAttribute("lstSPBanChay");
 	%>
 	<jsp:include page="header.jsp"></jsp:include>
 
@@ -187,7 +188,7 @@
 						<div class="aside">
 							<h3 class="aside-title">Sản phẩm bán chạy</h3>
 							<%
-								for (SanPham sp : lstSanPham) {
+								for (SanPham sp : lstSPBanChay) {
 							%>
 							<div class="product-widget">
 								<a href="ChiTiet/<%=sp.getIdSanPham()%>">
@@ -245,9 +246,11 @@
 					<!-- store products -->
 
 					<div class="row">
+					<input type="text" id="spLength" value="<%=lstSPTimKiem.size()%>" hidden=""/>
 						<%
 							for (SanPham sp : lstSPTimKiem) {
 						%>
+						
 						<!-- product -->
 						<div class="col-md-4 col-xs-6">
 							<div class="product contentPage">
@@ -308,7 +311,7 @@
 
 					<!-- store bottom filter -->
 					<div class="store-filter clearfix">
-						<span class="store-qty">Showing 20-100 products</span>
+						
 						<ul id="pagination"></ul>
 					</div>
 					<!-- /store bottom filter -->
@@ -330,12 +333,12 @@
 				<div class="col-md-12">
 					<div class="newsletter">
 						<p>
-							Sign Up for the <strong>NEWSLETTER</strong>
+							Đăng ký <strong>MUA HÀNG</strong>
 						</p>
 						<form>
-							<input class="input" type="email" placeholder="Enter Your Email">
+							<input class="input" type="email" placeholder="Nhập Email của bạn">
 							<button class="newsletter-btn">
-								<i class="fa fa-envelope"></i> Subscribe
+								<i class="fa fa-envelope"></i> ĐĂNG KÝ
 							</button>
 						</form>
 						<ul class="newsletter-follow">
@@ -422,34 +425,6 @@
 		</div>
 		<!-- /top footer -->
 
-		<!-- bottom footer -->
-		<div id="bottom-footer" class="section">
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<ul class="footer-payments">
-							<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-							<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-							<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-							<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-							<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-							<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-						</ul>
-						<span class="copyright"> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;<script>
-								document.write(new Date().getFullYear());
-							</script> All rights reserved | This template is made with <i
-							class="fa fa-heart-o" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</span>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /bottom footer -->
 	</footer>
 	<!-- /FOOTER -->
 
@@ -471,7 +446,16 @@
 				$(this).parents("form").submit();
 			})
 		});
-
+		
+		
+		$(function() {
+			if ($.session.get('#show') != null){
+				$('#show').val($.session.get('#show'));
+			} else {
+				$.session.set('#show', '6');
+			}
+		});
+		
 		$(document).ready(function() {
 			$('#sort').change(function() {
 				$.session.set('#sort', $('#sort').val());
@@ -483,17 +467,14 @@
 			if ($.session.get('#sort') != null)
 				$('#sort').val($.session.get('#sort'));
 		});
-		
-		$(function() {
-			if ($.session.get('#show') != null){
-				$('#show').val($.session.get('#show'));
-			} else {
-				$.session.set('#show', '6');
-			}
-		});
 
 		$(function() {
-			var pageSize = $.session.get('#show'); // Hiển thị 6 sản phẩm trên 1 trang
+			$.session.set('#spLength', $('#spLength').val());
+		});
+
+		
+		$(function() {
+			var pageSize = $.session.get('#show'); // Hiển thị sản phẩm trên 1 trang
 			showPage = function(page) {
 				$(".contentPage").hide();
 				$(".contentPage").each(function(n) {
@@ -502,7 +483,7 @@
 				});
 			}
 			showPage(1);
-			var totalRows = 40; // Tổng số sản phẩm hiển thị
+			var totalRows = $.session.get('#spLength'); // Tổng số sản phẩm hiển thị
 			var btnPage = 5; // Số nút bấm hiển thị di chuyển trang
 			var iTotalPages = Math.ceil(totalRows / pageSize);
 

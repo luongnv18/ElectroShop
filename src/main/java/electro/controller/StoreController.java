@@ -45,6 +45,7 @@ public class StoreController {
 		List<ThuongHieu> lstThuongHieus = thuongHieuSPService.GetListThuongHieu();
 		List<Long> lstSoLuongTheoDM = sanPhamService.DemSPTheoDM();
 		List<Long> lstSoLuongTheoTH = sanPhamService.DemSPTheoTh();
+		List<SanPham> lstSPBanChay = sanPhamService.getSanPhamBanChay();
 		List<SanPham> TimKiemSanPham = null;
 
 		modelMap.addAttribute("lstDanhMuc", lstDanhMucs);
@@ -52,6 +53,7 @@ public class StoreController {
 		modelMap.addAttribute("lstThuongHieu", lstThuongHieus);
 		modelMap.addAttribute("lstSoLuongTheoDM", lstSoLuongTheoDM);
 		modelMap.addAttribute("lstSoLuongTheoTH", lstSoLuongTheoTH);
+		modelMap.addAttribute("lstSPBanChay", lstSPBanChay);
 
 		if (sort != null) {
 			if (sort.equals("0")) {

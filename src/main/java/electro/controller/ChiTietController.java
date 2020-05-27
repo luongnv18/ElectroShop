@@ -35,9 +35,11 @@ public class ChiTietController {
 	public String Default(@PathVariable int id, ModelMap modelMap,HttpSession httpSession) {
 		List<DanhMuc> lstDanhMucs=danhMucSPService.GetListDanhMuc();
 		SanPham sanPham= sanPhamService.GetSanPhamById(id);
+		List<SanPham> lstSanPham = sanPhamService.TimKiemSanPhamTheoDanhMucVaThuongHieu(String.valueOf(sanPham.getDanhMuc().getIdDanhMuc()) , String.valueOf(sanPham.getThuongHieu().getIdThuongHieu()));
+		
 		modelMap.addAttribute("sanPham",sanPham);
 		modelMap.addAttribute("lstDanhMuc",lstDanhMucs);
-		
+		modelMap.addAttribute("lstSanPham",lstSanPham);
 		return "ChiTiet";
 	}
 }

@@ -205,7 +205,7 @@ public class SanPhamDAO {
 				+ "GROUP BY sp.IdSanPham, sp.TenSanPham, sp.Gia, sp.TinhTrang, sp.BaoHanh, sp.MoTa, sp.Image, sp.thuongHieu.IdThuongHieu, sp.danhMuc.IdDanhMuc "
 				+ "ORDER BY SUM(cthd.SoLuong) desc";	
 		Query query = session.createQuery(sql);
-		resultList = query.getResultList();
+		resultList = query.setMaxResults(5).getResultList();
 		return resultList;
 	}
 }
