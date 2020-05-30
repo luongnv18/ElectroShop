@@ -150,6 +150,7 @@ $(document).ready(function(){
 	});
 	
 	$('body').on('click', '.btnSuaSanPham', function(event) {
+		$('#ketqua').text('');
 		//reset lai chitietsanpham
 		$('#chitietsanphamform').children().remove();
 		$('#chitietsanphamform').append(elmtclone);

@@ -419,7 +419,7 @@
                                                 <form id="formThemSanPham">
                                                     <div class="form-group">
                                                         <label for="masanpham" class="col-form-label">Mã sản phẩm</label>
-                                                        <input id="masanpham" name="masanpham" type="text" class="form-control">
+                                                        <input id="masanpham" name="masanpham" type="text" class="form-control" readonly>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="tensanpham" class="col-form-label">Tên sản phẩm</label>
