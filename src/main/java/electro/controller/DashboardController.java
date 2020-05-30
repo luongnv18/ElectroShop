@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import electro.entity.DanhMuc;
@@ -40,22 +39,44 @@ public class DashboardController {
 	@Autowired
 	HoaDonService hoaDonService;
 	
-	@GetMapping
-	public String Default (ModelMap modelMap) {
-		List<SanPham> sanPhams=sanPhamService.GetListSanPhamLimit(0);
-		int tongsotrang=(int) Math.ceil(sanPhamService.GetTotalCount()/5.0);
+	@GetMapping(value = {"","/sanpham"})
+	public String SanPhamDashboard (@RequestParam(name = "tensanpham",required = false) String tensanpham,@RequestParam(name = "id",required = false) Integer id,ModelMap modelMap) {
+		List<SanPham> sanPhams=new ArrayList<SanPham>();
+		int tongsotrang=1;
+		String message=null;
+		if(tensanpham==null && id==null) {
+			System.out.println(tensanpham);
+			System.out.println(id);
+			sanPhams=sanPhamService.GetListSanPhamLimit(0);
+			tongsotrang=(int) Math.ceil(sanPhamService.GetTotalCount()/5.0);
+			
+		}else if(tensanpham!=null) {
+			sanPhams=sanPhamService.findByTenSanPham(tensanpham);
+			tongsotrang=(int) Math.ceil(sanPhams.size()/5.0);
+		}else if(id!=null) {
+			SanPham sanPham=sanPhamService.findById(id);
+			if(sanPham==null) {
+				message="Không tìm thấy sản phẩm nào!";
+			}
+			sanPhams.add(sanPham);
+		}
+		if(sanPhams.size()<=0) {
+			message="Không tìm thấy sản phẩm nào!";
+		}
+		modelMap.addAttribute("message",message);
+		modelMap.addAttribute("tongsotrang", tongsotrang);
+		modelMap.addAttribute("lstSanPham",sanPhams);
 		List<ThuongHieu> thuongHieus=thuongHieuSPService.GetListThuongHieu();
 		List<DanhMuc> danhMucs=danhMucSPService.GetListDanhMuc();
 		List<SizeSanPham> sizeSanPhams=sizeSanPhamService.getAllSizeSP();
 		List<MauSanPham> mauSanPhams=mauSanPhamService.getAllMauSP();
-		modelMap.addAttribute("tongsotrang", tongsotrang);
-		modelMap.addAttribute("lstSanPham",sanPhams);
 		modelMap.addAttribute("lstDanhMuc",danhMucs);
 		modelMap.addAttribute("lstThuongHieu",thuongHieus);
 		modelMap.addAttribute("lstMau",mauSanPhams);
 		modelMap.addAttribute("lstSize",sizeSanPhams);
 		return "Dashboard";
 	}
+	
 	@GetMapping("/hoadon")
 	public String HoaDonDashboard (@RequestParam(name = "phoneNumber",required = false) String phoneNumber,@RequestParam(name = "id",required = false) Integer id,ModelMap modelMap) {
 		List<HoaDon> hoaDons=new ArrayList<HoaDon>();
@@ -86,15 +107,7 @@ public class DashboardController {
 		modelMap.addAttribute("lstHoaDon",hoaDons);
 		return "HoaDonDashboard";
 	}
-//	@RequestMapping(value = "/hoadon", method = RequestMethod.GET)
-//	public String TimKiemHoaDon (@RequestParam(name = "keyword",required = false) String keyword, ModelMap modelMap) {
-//		System.out.println(keyword);
-////		List<HoaDon> hoaDons=hoaDonService.getListHoaDonLimit(0);
-////		int tongsotrang=(int) Math.ceil(hoaDonService.getTotalCount()/5.0);
-////		modelMap.addAttribute("tongsotrang", tongsotrang);
-////		modelMap.addAttribute("lstHoaDon",hoaDons);
-//		return "HoaDonDashboard";
-//	}
+
 
 
 }

@@ -49,7 +49,7 @@
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">ElectroShop</a>
+                <a class="navbar-brand" href="/ElectroShop/dashboard">ElectroShop</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -172,35 +172,10 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Sản phẩm <span class="badge badge-success"></span></a>
+                                <a class="nav-link active" href="/ElectroShop/dashboard"><i class="fa fa-fw fa-user-circle"></i>Sản phẩm <span class="badge badge-success"></span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Hóa đơn</a>
-                                <div id="submenu-2" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/cards.html">Cards <span class="badge badge-secondary">New</span></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/general.html">General</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/carousel.html">Carousel</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/listgroup.html">List Group</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/typography.html">Typography</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/accordions.html">Accordions</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/tabs.html">Tabs</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <a class="nav-link" href="/ElectroShop/dashboard/hoadon"><i class="fa fa-fw fa-rocket"></i>Hóa đơn</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-chart-pie"></i>Chart</a>
@@ -428,7 +403,7 @@
                                     </nav>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#themsanphamform" id="btnThemSanPham">Thêm sản phẩm</button>
+                            <button type="button" class="btn btn-primary mb-2" style="float: right;" data-toggle="modal" data-target="#themsanphamform" id="btnThemSanPham">Thêm sản phẩm</button>
                             <!-- Modal -->
                                 <div class="modal fade" id="themsanphamform" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
@@ -498,7 +473,7 @@
                                                     </div>  
                                                     
                                                 </form>
-                                                <span id=ketqua ></span>
+                                                <span id="ketqua" ></span>
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="#" class="btn btn-secondary" data-dismiss="modal">Đóng</a>
@@ -546,6 +521,29 @@
 
                                           <!-- recent orders  -->
                             <!-- ============================================================== -->
+                            <!-- Tìm kiếm sản phẩm -->
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-2">
+	                            <form action="" method="get">
+	                                <div class="input-group">
+	                                    <input name="id" type="search" class="form-control" placeholder="Mã sản phẩm">
+	                                    <div class="input-group-append">
+	                                        <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+	                                    </div>
+	                                </div>
+	                             </form>   
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-2">
+                            	<form action="" method="get">
+                            		<div class="input-group">
+                                    	<input name="tensanpham" type="search" class="form-control" placeholder="Tên sản phẩm">
+	                                    <div class="input-group-append">
+	                                        <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+	                                    </div>
+                                	</div>
+                            	</form>
+                                
+                            </div>
+                            <!-- End Tìm kiếm sản phẩm -->
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
                                     <h5 class="card-header">Sản phẩm</h5>
@@ -563,7 +561,8 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <%for(SanPham sp : sanPhams){
+                                                <%if(request.getAttribute("message")==null){
+                                                for(SanPham sp : sanPhams){
                                                 %>
                                                     <tr class="thongtinsanpham">
                                                         <td><%=sp.getIdSanPham() %></td>
@@ -586,11 +585,12 @@
                                                             </div>
                                                        	</td>
                                                     </tr>
-                                                  <%} %>
+                                                  <%}} %>
                                                     <tr>
                                                         <td colspan="9"><a href="#" class="btn btn-outline-light float-right">View Details</a></td>
                                                     </tr>
                                                 </tbody>
+                                                 <span>${message }</span>
                                             </table>
                                         </div>
                                     </div>

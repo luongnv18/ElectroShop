@@ -21,6 +21,12 @@ public class SanPhamService {
 	public Long GetTotalCount() {
 		return sanphamDAO.GetTotalCount();
 	}
+	public SanPham findById(int idSanPham) {
+		return sanphamDAO.findById(idSanPham);
+	}
+	public List<SanPham> findByTenSanPham(String keyword) {
+		return sanphamDAO.findByTenSanPham(keyword);
+	}
 	public SanPham GetSanPhamById(int Id) {
 		SanPham sanPham=sanphamDAO.GetSanPhamById(Id);
 		return sanPham;

@@ -10,8 +10,6 @@ import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import electro.entity.ChiTietHoaDon;
-import electro.entity.ChiTietSanPham;
 import electro.entity.SanPham;
 
 @Repository
@@ -42,7 +40,24 @@ public class SanPhamDAO {
 		Long totalcount = (Long)session.createQuery(sql).uniqueResult();
 		return totalcount;
 	}
-
+	@Transactional
+	public SanPham findById(int idSanPham) {
+		Session session=sessionFactory.getCurrentSession();
+		return session.find(SanPham.class, idSanPham);
+	}
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<SanPham> findByTenSanPham(String keyword) {
+		Session session=sessionFactory.getCurrentSession();
+		
+//		Criteria ctr = session.createCriteria(HoaDon.class);
+//		ctr.add(Restrictions.like("SoDTNguoiNhan", keyword));
+		String hql = "from SanPham where TenSanPham like :keyword";
+		 
+		Query query = session.createQuery(hql);
+		query.setParameter("keyword", "%" + keyword + "%");
+		return query.getResultList();
+	}
 	@Transactional
 	public SanPham GetSanPhamById(int Id) {
 		Session session = sessionFactory.getCurrentSession();
