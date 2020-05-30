@@ -16,4 +16,7 @@ public class ChiTietSanPhamService {
 		List<ChiTietSanPham> lstctsp=chiTietSanPhamDAO.LaySizeTheoMau(masp, mamau);
 		return lstctsp;
 	}
+	public void updateSoLuong(int id, int soluonggiam) {
+		chiTietSanPhamDAO.updateSoLuong(id, soluonggiam);
+	}
 }

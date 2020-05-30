@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import electro.entity.ChiTietSanPham;
+import electro.entity.SanPham;
 
 @Repository
 public class ChiTietSanPhamDAO {
@@ -21,5 +22,12 @@ public class ChiTietSanPhamDAO {
 		List<ChiTietSanPham> lstctsp= session.createQuery("from ChiTietSanPham where IdSanPham="+masp+" AND IdMau="+mamau).getResultList();
 		System.out.println(lstctsp);
 		return lstctsp;
+	}
+	@Transactional
+	public void updateSoLuong(int id, int soluonggiam) {
+		Session session = sessionFactory.getCurrentSession();
+		ChiTietSanPham ctsp=session.get(ChiTietSanPham.class, id);
+		ctsp.setSoLuong(ctsp.getSoLuong()-soluonggiam);
+		session.update(ctsp);
 	}
 }

@@ -29,12 +29,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import electro.entity.ChiTietSanPham;
 import electro.entity.DanhMuc;
 import electro.entity.GioHang;
+import electro.entity.HoaDon;
+import electro.entity.HoaDonDTO;
 import electro.entity.MauSanPham;
 import electro.entity.SanPham;
 import electro.entity.SanPhamDTO;
 import electro.entity.SizeSanPham;
 import electro.entity.ThuongHieu;
 import electro.service.ChiTietSanPhamService;
+import electro.service.HoaDonService;
 import electro.service.SanPhamService;
 
 @Controller
@@ -282,11 +285,55 @@ public class AjaxController {
 			}
 			sanPham.setLstChiTietSanPham(chiTietSanPhams);
 			 sanPhamService.SuaSanPham(sanPham);
-//			 Hibernate: insert into ChiTietSanPham (NgayNhap, SoLuong, IdMau, IdSanPham, IdSize) values (?, ?, ?, ?, ?)
-// Hibernate: insert into ChiTietSanPham (NgayNhap, SoLuong, IdMau, IdSanPham, IdSize) values (?, ?, ?, ?, ?)
-// Hibernate: insert into ChiTietSanPham (NgayNhap, SoLuong, IdMau, IdSanPham, IdSize) values (?, ?, ?, ?, ?)
-// Hibernate: insert into ChiTietSanPham (NgayNhap, SoLuong, IdMau, IdSanPham, IdSize) values (?, ?, ?, ?, ?)
-// Hibernate: update SanPham set BaoHanh=?, Gia=?, Image=?, MoTa=?, TenSanPham=?, TinhTrang=?, IdDanhMuc=?, IdThuongHieu=? where IdSanPham=?
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Autowired
+	HoaDonService hoaDonService;
+	@GetMapping(path = "/LayHoaDonLimit", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public List<HoaDonDTO> LayHoaDonLimit(@RequestParam int vitribatdau) {
+		System.out.println(vitribatdau);
+		List<HoaDonDTO> lstHoaDonDTOs = new ArrayList<HoaDonDTO>();
+
+		List<HoaDon> hoaDons = hoaDonService.getListHoaDonLimit(vitribatdau);
+		for (HoaDon hd : hoaDons) {
+			HoaDonDTO hdDTO = new HoaDonDTO();
+			hdDTO.setIdHoaDon(hd.getIdHoaDon());
+			hdDTO.setTenNguoiNhan(hd.getTenNguoiNhan());
+			hdDTO.setSoDTNguoiNhan(hd.getSoDTNguoiNhan());
+			hdDTO.setDiaChiGiaoHang(hd.getDiaChiGiaoHang());
+			hdDTO.setTinhTrang(hd.getTinhTrang());
+			hdDTO.setGhiChu(hd.getGhiChu());
+			hdDTO.setNgayMua(hd.getNgayMua());
+			
+			lstHoaDonDTOs.add(hdDTO);
+		}
+		return lstHoaDonDTOs;
+	}
+	@PostMapping(path = "/UpdateHoaDon")
+	@ResponseBody
+	public void UpdateHoaDon( String dataJson){
+		System.out.println("cap nhat hoa don: "+dataJson);
+//		{"mahd":"14","tennguoinhan":"Uông Ph?ng Phát","sodienthoai":"475695674563",
+//		"diachigiaohang":"03, Thôn 2, Thôn Chiêm Khoa, Qu?n Ki?n Ánh Thái Nguyên","ghichuhoadon":"Update","tinhtranghoadon":"4"}
+		ObjectMapper objectMapper = new ObjectMapper();
+		JsonNode jsonObject;
+		try {
+			HoaDon hoaDon=new HoaDon();
+			jsonObject = objectMapper.readTree(dataJson);
+			hoaDon.setIdHoaDon(jsonObject.get("mahd").asInt());
+			hoaDon.setTenNguoiNhan(jsonObject.get("tennguoinhan").asText());
+			hoaDon.setSoDTNguoiNhan(jsonObject.get("sodienthoai").asText());
+			hoaDon.setDiaChiGiaoHang(jsonObject.get("diachigiaohang").asText());
+			hoaDon.setGhiChu(jsonObject.get("ghichuhoadon").asText());
+			hoaDon.setTinhTrang(jsonObject.get("tinhtranghoadon").asInt());
+			hoaDonService.updateHoaDon(hoaDon);
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

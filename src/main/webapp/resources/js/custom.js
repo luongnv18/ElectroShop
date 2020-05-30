@@ -369,4 +369,107 @@ $(document).ready(function(){
 		 elmtclone1.removeAttr('class');
 		$(idphantu).append(elmtclone1[0].outerHTML);
 	}
+	
+//hoadondashboard.jsp
+	//load thong tin hoa don vao form
+	$('body').on('click','.fa-edit', function () {
+		$('#ketqua').text('');
+		var mahd=$(this).closest('tr').find('td:nth-child(1)').text();
+		var tennguoinhan=$(this).closest('tr').find('td:nth-child(2)').text();
+		var sodienthoai=$(this).closest('tr').find('td:nth-child(3)').text();
+		var diachigiaohang=$(this).closest('tr').find('td:nth-child(4)').text();
+		var ghichuhoadon=$(this).closest('tr').find('td:nth-child(5)').text();
+		var tinhtranghoadon=$(this).closest('tr').find('td:nth-child(7) div span').attr('value');
+		$('#mahd').val(mahd);
+		$('#tennguoinhan').val(tennguoinhan);
+		$('#sodienthoai').val(sodienthoai);
+		$('#diachigiaohang').val(diachigiaohang);
+		$('#ghichuhoadon').val(ghichuhoadon);
+		$('#tinhtranghoadon').val(tinhtranghoadon);
+		
+	});
+	//pagination hoa don
+	$('#pagination-dashboardhoadon li').click(function (event) { 
+		event.preventDefault();
+		$('#pagination-dashboardhoadon li').removeClass('active');
+		$(this).addClass('active');
+		var vitribatdau=$(this).text();
+		vitribatdau=(vitribatdau-1)*5;
+		$.ajax({
+			url:"/ElectroShop/api/LayHoaDonLimit",
+			type: "GET",
+		    data:{
+		    	vitribatdau:vitribatdau
+		    },
+			success: function(value){
+				var clone=$(".thongtinhoadon:nth-child(1)").clone();
+				$("#tableHoaDon tbody").children().remove();
+				for (var index = 0; index < value.length; index++) {
+					clone.find('td:nth-child(1)').text(value[index].idHoaDon);
+					clone.find('td:nth-child(2)').text(value[index].tenNguoiNhan);
+					clone.find('td:nth-child(3)').text(value[index].soDTNguoiNhan);
+					clone.find('td:nth-child(4)').text(value[index].diaChiGiaoHang);
+					clone.find('td:nth-child(5)').text(value[index].ghiChu);
+					clone.find('td:nth-child(6)').text(value[index].ngayMua.dayOfMonth+'/'+value[index].ngayMua.monthValue+'/'+value[index].ngayMua.year+' '+value[index].ngayMua.hour+':'+value[index].ngayMua.minute+':'+value[index].ngayMua.second);
+					switch (value[index].tinhTrang) {
+						case 0:
+							clone.find('td:nth-child(7) div span').attr('class','badge badge-brand mr-2');
+							clone.find('td:nth-child(7) div span').text('Đang xử lý');
+							clone.find('td:nth-child(7) div span').attr('value',0);
+							break;
+						case 1:
+							clone.find('td:nth-child(7) div span').attr('class','badge badge-info mr-2');
+							clone.find('td:nth-child(7) div span').text('Đã thanh toán');
+							clone.find('td:nth-child(7) div span').attr('value',1);
+							break;
+						case 2:
+							clone.find('td:nth-child(7) div span').attr('class','badge badge-primary mr-2');
+							clone.find('td:nth-child(7) div span').text('Đang giao hàng');
+							clone.find('td:nth-child(7) div span').attr('value',2);
+							break;
+						case 3:
+							clone.find('td:nth-child(7) div span').attr('class','badge badge-success mr-2');
+							clone.find('td:nth-child(7) div span').text('Đã giao hàng');
+							clone.find('td:nth-child(7) div span').attr('value',3);
+							break;
+						case 4:
+							clone.find('td:nth-child(7) div span').attr('class','badge badge-danger mr-2');
+							clone.find('td:nth-child(7) div span').text('Đã hủy');
+							clone.find('td:nth-child(7) div span').attr('value',4);
+							break;
+						default:
+							break;
+					}
+					$("#tableHoaDon tbody").append(clone[0].outerHTML);
+				}
+			}
+		})
+	});
+	//UpdateHoaDon
+	$('#btnSubmitHoaDonForm').click(function(event) {
+		event.preventDefault();
+		var fields=$('#formUpdateHoaDon').serializeArray();
+		json={};
+		$.each(fields, function(i, field){
+			json[field.name]=field.value;
+		});
+	   $.ajax({
+			url:'/ElectroShop/api/UpdateHoaDon',
+			type:'POST',
+		    data:{
+		    	dataJson: JSON.stringify(json)
+		    },
+			success: function(value){
+					$('#ketqua').text('Cập nhật hóa đơn thành công');
+					$('#ketqua').attr('style','color: limegreen;font-weight: bold;');
+			},
+		    error: function (error) {
+					$('#ketqua').text('Cập nhật hóa đơn thất bại');
+					$('#ketqua').attr('style','color: red;font-weight: bold;');
+		        console.log('error; ' + eval(error));
+		    }
+		})
+
+	});
+	
 })

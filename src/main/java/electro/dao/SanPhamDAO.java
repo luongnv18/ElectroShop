@@ -6,10 +6,12 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import electro.entity.ChiTietHoaDon;
+import electro.entity.ChiTietSanPham;
 import electro.entity.SanPham;
 
 @Repository
@@ -27,13 +29,10 @@ public class SanPhamDAO {
 	@Transactional
 	public List<SanPham> GetListSanPhamLimit(int vitribatdau) {
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "from SanPham";
-		
 		Query query = session.createQuery("from SanPham");
 		query.setFirstResult(vitribatdau);
 		query.setMaxResults(5);
 		List<SanPham> lstSanPhams = query.getResultList();
-		
 		return lstSanPhams;
 	}
 	@Transactional

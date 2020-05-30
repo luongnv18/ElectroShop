@@ -22,6 +22,7 @@ import electro.entity.GioHang;
 import electro.entity.HoaDon;
 import electro.entity.KhachHang;
 import electro.service.ChiTietHoaDonService;
+import electro.service.ChiTietSanPhamService;
 import electro.service.DanhMucSPService;
 import electro.service.HoaDonService;
 
@@ -35,6 +36,8 @@ public class ThanhToanController {
 	HoaDonService hoaDonService;
 	@Autowired
 	ChiTietHoaDonService chiTietHoaDonService;
+	@Autowired
+	ChiTietSanPhamService chiTietSanPhamService;
 	
 	@GetMapping
 	public String Default(ModelMap modelMap) {
@@ -59,6 +62,7 @@ public class ThanhToanController {
 			hoaDon.setGhiChu(ghiChu);
 			hoaDon.setDiaChiGiaoHang(diaChiGiaoHang);
 			hoaDon.setNgayMua(LocalDateTime.now());
+			hoaDon.setTinhTrang(0);
 			//list chitiethoadon
 			Set<ChiTietHoaDon> lstChiTietHoaDons=new HashSet<ChiTietHoaDon>();
 			for(GioHang gioHang:gioHangs) {
@@ -79,7 +83,12 @@ public class ThanhToanController {
 			if(idHoaDon>0) {//them thanh cong
 				System.out.println("them hoa don thanh cong");
 				ketqua=true;
+				//cap nhat lai so luong ton cua san pham
+				for(GioHang gioHang:gioHangs) {
+					chiTietSanPhamService.updateSoLuong(gioHang.getIdChiTietSp(), gioHang.getSoLuong());
+				}
 				gioHangs.removeAll(gioHangs);
+				
 			}else {//them hoa don that bai
 				System.out.println("them hoa don that bai");
 				ketqua=false;
