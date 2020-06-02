@@ -73,7 +73,6 @@
 				<ul class="main-nav nav navbar-nav">
 					<li><a href="./">Trang chủ</a></li>
 					<li class="active"><a href="./SanPham">Sản phẩm</a></li>
-					<li><a href="#">Loại sản phẩm</a></li>
 				</ul>
 				<!-- /NAV -->
 			</div>

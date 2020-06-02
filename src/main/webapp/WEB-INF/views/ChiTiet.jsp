@@ -80,7 +80,6 @@
 				<ul class="main-nav nav navbar-nav">
 					<li><a href="/ElectroShop">Trang chủ</a></li>
 					<li class="active"><a href="/ElectroShop/SanPham">Sản phẩm</a></li>
-					<li><a href="#">Loại sản phẩm</a></li>
 				</ul>
 				<!-- /NAV -->
 			</div>
