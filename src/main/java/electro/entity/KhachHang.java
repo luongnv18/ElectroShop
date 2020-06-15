@@ -1,6 +1,5 @@
 package electro.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +17,7 @@ public class KhachHang {
 	boolean GioiTinh;
 	String SoDT;
 	String Email;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "IdRole")
 	Roles role;
 	String TenDangNhap;

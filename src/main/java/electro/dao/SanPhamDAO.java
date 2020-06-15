@@ -103,8 +103,7 @@ public class SanPhamDAO {
 	public List<SanPham> TimKiemSanPhamTheoThuongHieuVaDanhMuc(String dm, String th) {
 		Session session = sessionFactory.getCurrentSession();
 		List<SanPham> resultList;
-		String sql = "from SanPham sp where sp.thuongHieu.IdThuongHieu IN (" + th + ") AND sp.danhMuc.IdDanhMuc IN ("
-				+ dm + ")";
+		String sql = "from SanPham sp where sp.thuongHieu.IdThuongHieu IN (" + th + ") AND sp.danhMuc.IdDanhMuc IN ("+ dm + ")";
 		resultList = session.createQuery(sql).getResultList();
 		return resultList;
 	}

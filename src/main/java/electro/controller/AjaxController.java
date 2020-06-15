@@ -55,6 +55,7 @@ public class AjaxController {
 			System.out.println("vitrixoa:" + vitri);
 			if (vitri >= 0) {
 				gioHangs.remove(vitri);
+				System.out.println("Xoa gio hang"+gioHangs);
 				return "true";
 			} else
 				return "false";

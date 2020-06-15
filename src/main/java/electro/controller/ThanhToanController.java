@@ -50,8 +50,10 @@ public class ThanhToanController {
 		List<DanhMuc> lstDanhMucs=danhMucSPService.GetListDanhMuc();
 		modelMap.addAttribute("lstDanhMuc",lstDanhMucs);
 		boolean ketqua=false;
-		if(httpSession.getAttribute("giohang")!=null) {
-			List<GioHang> gioHangs=(List<GioHang>) httpSession.getAttribute("giohang");
+		System.out.println(httpSession.getAttribute("giohang"));
+		List<GioHang> gioHangs=(List<GioHang>) httpSession.getAttribute("giohang");
+		if(gioHangs.size()>0) {
+//			List<GioHang> gioHangs=(List<GioHang>) httpSession.getAttribute("giohang");
 			HoaDon hoaDon=new HoaDon();
 			if(httpSession.getAttribute("user")!=null) {
 				KhachHang kh=(KhachHang) httpSession.getAttribute("user");
@@ -94,6 +96,7 @@ public class ThanhToanController {
 				ketqua=false;
 			}
 		}
+		else ketqua=false;
 		modelMap.addAttribute("kqThemHoaDon",ketqua);
 		return "checkout";
 	}

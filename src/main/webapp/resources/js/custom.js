@@ -473,4 +473,8 @@ $(document).ready(function(){
 
 	});
 	
+	$('#navbarNav ul li').click(function(){
+		$(this).addClass('active');
+	})
+	
 })

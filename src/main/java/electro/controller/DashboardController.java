@@ -1,7 +1,10 @@
 package electro.controller;
 
+import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import electro.entity.DanhMuc;
 import electro.entity.HoaDon;
+import electro.entity.KhachHang;
 import electro.entity.MauSanPham;
 import electro.entity.SanPham;
 import electro.entity.SizeSanPham;
@@ -39,7 +43,23 @@ public class DashboardController {
 	@Autowired
 	HoaDonService hoaDonService;
 	
-	@GetMapping(value = {"","/sanpham"})
+	@GetMapping
+	public String Default(HttpSession session) {
+		if(session.getAttribute("user")==null) {
+			return "redirect:DangNhap";
+		}
+		else {
+			KhachHang kh=(KhachHang)session.getAttribute("user");
+			System.out.println(kh.getRole().getName());
+			if(kh.getRole().getName().equals("Admin")) {
+				return "redirect:/dashboard/sanpham";
+			}
+			else return "redirect:/";
+			
+		}
+	}
+	
+	@GetMapping(value = {"/sanpham"})
 	public String SanPhamDashboard (@RequestParam(name = "tensanpham",required = false) String tensanpham,@RequestParam(name = "id",required = false) Integer id,ModelMap modelMap) {
 		List<SanPham> sanPhams=new ArrayList<SanPham>();
 		int tongsotrang=1;
