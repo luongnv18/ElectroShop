@@ -45,6 +45,7 @@ public class ThanhToanController {
 		modelMap.addAttribute("lstDanhMuc",lstDanhMucs);
 		return "checkout";
 	}
+	@SuppressWarnings("unchecked")
 	@GetMapping("/{tenNguoiNhan}/{soDTNguoiNhan}/{diaChiGiaoHang}/{ghiChu}")
 	public String ThemHoaDon(HttpSession httpSession, @PathVariable String tenNguoiNhan, @PathVariable String soDTNguoiNhan, @PathVariable String diaChiGiaoHang,@PathVariable String ghiChu, ModelMap modelMap) {
 		List<DanhMuc> lstDanhMucs=danhMucSPService.GetListDanhMuc();

@@ -15,6 +15,7 @@ import electro.entity.SizeSanPham;
 public class SizeSanPhamDAO {
 	@Autowired
 	SessionFactory sessionFactory;
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SizeSanPham> getAllSizeSP() {
 		Session session=sessionFactory.getCurrentSession();

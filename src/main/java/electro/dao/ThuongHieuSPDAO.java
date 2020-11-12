@@ -15,6 +15,7 @@ import electro.entity.ThuongHieu;
 public class ThuongHieuSPDAO {
 	@Autowired
 	SessionFactory sessionFactory;
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<ThuongHieu> GetListThuongHieu(){
 		Session session=sessionFactory.getCurrentSession();

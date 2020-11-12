@@ -15,6 +15,7 @@ import electro.entity.DanhMuc;
 public class DanhMucSPDAO {
 	@Autowired
 	SessionFactory sessionFactory;
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<DanhMuc> GetListDanhMuc(){
 		Session session=sessionFactory.getCurrentSession();

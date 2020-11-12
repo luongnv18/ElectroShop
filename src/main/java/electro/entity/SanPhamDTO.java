@@ -1,7 +1,6 @@
 package electro.entity;
 
 import java.util.List;
-import java.util.Set;
 
 
 public class SanPhamDTO {

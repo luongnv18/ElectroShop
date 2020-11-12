@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,6 +43,7 @@ import electro.service.SanPhamService;
 @RequestMapping("/api")
 @SessionAttributes("giohang")
 public class AjaxController {
+	@SuppressWarnings("unchecked")
 	@GetMapping("/XoaGioHang")
 	@ResponseBody
 	public String XoaGioHang(@RequestParam int idSanPham, @RequestParam int idMau, @RequestParam int idSize,
@@ -63,6 +63,7 @@ public class AjaxController {
 		return "false";
 	}
 
+	@SuppressWarnings("unchecked")
 	@GetMapping("/ThemGioHang")
 	@ResponseBody
 	public String ThemGioHang(@RequestParam int idSanPham, @RequestParam String tenSanPham, @RequestParam int giasp,
@@ -321,8 +322,8 @@ public class AjaxController {
 	@ResponseBody
 	public void UpdateHoaDon( String dataJson){
 		System.out.println("cap nhat hoa don: "+dataJson);
-//		{"mahd":"14","tennguoinhan":"Uông Ph?ng Phát","sodienthoai":"475695674563",
-//		"diachigiaohang":"03, Thôn 2, Thôn Chiêm Khoa, Qu?n Ki?n Ánh Thái Nguyên","ghichuhoadon":"Update","tinhtranghoadon":"4"}
+//		{"mahd":"14","tennguoinhan":"Uï¿½ng Ph?ng Phï¿½t","sodienthoai":"475695674563",
+//		"diachigiaohang":"03, Thï¿½n 2, Thï¿½n Chiï¿½m Khoa, Qu?n Ki?n ï¿½nh Thï¿½i Nguyï¿½n","ghichuhoadon":"Update","tinhtranghoadon":"4"}
 		ObjectMapper objectMapper = new ObjectMapper();
 		JsonNode jsonObject;
 		try {

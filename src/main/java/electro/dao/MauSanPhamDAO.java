@@ -15,6 +15,7 @@ import electro.entity.MauSanPham;
 public class MauSanPhamDAO {
 	@Autowired
 	SessionFactory sessionFactory;
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<MauSanPham> getAllMauSP() {
 		Session session=sessionFactory.getCurrentSession();

@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import electro.entity.ChiTietSanPham;
-import electro.entity.SanPham;
 
 @Repository
 public class ChiTietSanPhamDAO {
 	@Autowired
 	SessionFactory sessionFactory;
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<ChiTietSanPham> LaySizeTheoMau(int masp, int mamau) {
 		Session session=sessionFactory.getCurrentSession();

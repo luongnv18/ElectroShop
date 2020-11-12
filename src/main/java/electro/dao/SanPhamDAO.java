@@ -17,6 +17,7 @@ public class SanPhamDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SanPham> GetListSanPham() {
 		Session session = sessionFactory.getCurrentSession();
@@ -24,6 +25,7 @@ public class SanPhamDAO {
 		List<SanPham> lstSanPhams = session.createQuery(sql).getResultList();
 		return lstSanPhams;
 	}
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SanPham> GetListSanPhamLimit(int vitribatdau) {
 		Session session = sessionFactory.getCurrentSession();
@@ -65,6 +67,7 @@ public class SanPhamDAO {
 		return sanPham;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Long> DemSPTheoDM() {
 		Session session = sessionFactory.getCurrentSession();
@@ -73,6 +76,7 @@ public class SanPhamDAO {
 		return lstSoLuongTheoDM;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Long> DemSPTheoTH() {
 		Session session = sessionFactory.getCurrentSession();
@@ -81,6 +85,7 @@ public class SanPhamDAO {
 		return lstSoLuongTheoTH;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SanPham> TimKiemSanPhamTheoDanhMuc(String key) {
 		Session session = sessionFactory.getCurrentSession();
@@ -90,6 +95,7 @@ public class SanPhamDAO {
 		return resultList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SanPham> TimKiemSanPhamTheoThuongHieu(String key) {
 		Session session = sessionFactory.getCurrentSession();
@@ -99,6 +105,7 @@ public class SanPhamDAO {
 		return resultList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SanPham> TimKiemSanPhamTheoThuongHieuVaDanhMuc(String dm, String th) {
 		Session session = sessionFactory.getCurrentSession();
@@ -108,6 +115,7 @@ public class SanPhamDAO {
 		return resultList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SanPham> TimKiemSanPhamTheoGia(String from, String to) {
 		Session session = sessionFactory.getCurrentSession();
@@ -117,6 +125,7 @@ public class SanPhamDAO {
 		return resultList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SanPham> TimKiemSanPhamTheoTen(String key) {
 		Session session = sessionFactory.getCurrentSession();
@@ -128,6 +137,7 @@ public class SanPhamDAO {
 		return resultList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SanPham> TimKiemSanPhamTheoTenVaDanhMuc(String name, String category) {
 		Session session = sessionFactory.getCurrentSession();
@@ -139,6 +149,7 @@ public class SanPhamDAO {
 		return resultList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SanPham> SapXepSanPhamTheoNgayNhap() {
 		Session session = sessionFactory.getCurrentSession();
@@ -149,6 +160,7 @@ public class SanPhamDAO {
 		return resultList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SanPham> SapXepSanPhamTheoGiaTuThapDenCao() {
 		Session session = sessionFactory.getCurrentSession();
@@ -159,6 +171,7 @@ public class SanPhamDAO {
 		return resultList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SanPham> SapXepSanPhamTheoGiaTuCaoDenThap() {
 		Session session = sessionFactory.getCurrentSession();
@@ -208,6 +221,7 @@ public class SanPhamDAO {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<SanPham> getSanPhamBanChay(){
 		Session session = sessionFactory.getCurrentSession();
