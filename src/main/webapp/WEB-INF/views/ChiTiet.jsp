@@ -161,11 +161,9 @@
 								review</a>
 						</div>
 						<div>
-							<h3 class="product-price">${sanPham.getGia()}
-								VND
-								<del class="product-old-price">$990.00</del>
+							<h3 class="product-price giatien">${sanPham.getGia()}
+								
 							</h3>
-							<span class="product-available">In Stock</span>
 						</div>
 						<p></p>
 						

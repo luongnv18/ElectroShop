@@ -110,7 +110,8 @@
 													<a href="#"><%=gioHang.getTenSanPham() %></a>
 												</h3>
 												<h4 class="product-price">
-													<span class="qty"><%=gioHang.getSoLuong() %>x</span><%=gioHang.getGiasp() %>VND
+													<span class="qty"><%=gioHang.getSoLuong() %>x</span>
+													<span class="qty giatien" style="font-weight: bold"><%=gioHang.getGiasp() %></span>
 												</h4>
 											</div>
 											<button class="delete">
@@ -126,7 +127,7 @@
 										for(GioHang giohang:lstGioHangs){
 											tongtien=tongtien+giohang.getGiasp()*giohang.getSoLuong();
 										}%>
-										<h5>Tổng tiền: <%=tongtien %>VND</h5>
+										<h5>Tổng tiền: <span class="qty giatien" style="font-weight: bold"><%=tongtien %></span></h5>
 									</div>
 									<div class="cart-btns">
 										<a href="#">View Cart</a> <a href="/ElectroShop/thanhtoan">Thanh toán <i
