@@ -4,7 +4,7 @@
 
   <!-- The front controller of this Spring Web application, responsible for handling all application requests -->
 	<servlet>
-		<servlet-name>electroshop-servlet</servlet-name>
+		<servlet-name>electroshop</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -15,7 +15,7 @@
 
 	<!-- Map all requests to the DispatcherServlet for handling -->
 	<servlet-mapping>
-		<servlet-name>electroshop-servlet</servlet-name>
+		<servlet-name>electroshop</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 </web-app>

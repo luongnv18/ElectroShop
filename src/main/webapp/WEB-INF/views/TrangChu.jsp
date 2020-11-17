@@ -182,9 +182,9 @@
 												<a href="ChiTiet/<%=sp.getIdSanPham()%>"> <%=sp.getTenSanPham()%>
 												</a>
 											</h3>
-											<h4 class="product-price">
+											<h4 class="product-price giatien">
 												<%=sp.getGia()%>
-												<del class="product-old-price"><%=sp.getGia()%></del>
+												<del class="product-old-price giatien"><%=sp.getGia()%></del>
 											</h4>
 											<div class="product-rating">
 												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -323,11 +323,11 @@
 										<div class="product-body">
 											<p class="product-category"><%=sp.getDanhMuc().getTenDanhMuc() %></p>
 											<h3 class="product-name">
-												<a href="#"><%=sp.getTenSanPham() %></a>
+												<a href="ChiTiet/<%=sp.getIdSanPham()%>"><%=sp.getTenSanPham() %></a>
 											</h3>
-											<h4 class="product-price">
+											<h4 class="product-price giatien">
 												<%=sp.getGia() %>
-												<del class="product-old-price"><%=sp.getGia() %></del>
+												<del class="product-old-price giatien"><%=sp.getGia() %></del>
 											</h4>
 											<div class="product-rating">
 												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -360,8 +360,9 @@
 												<i class="fa fa-shopping-cart"></i> add to cart
 											</button>
 										</div>
-										</a>
+										
 									</div>
+									</a>
 									<!-- /product -->
 									
 									<% 
